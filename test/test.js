@@ -1,8 +1,11 @@
 var assert = require('assert');
 var main = require('../index.js');
 
-var FORMAT = '%A - (%Y) %T';
-var BOOK = {
+const OPTIONS = {
+  'q': true
+};
+const FORMAT = '%A - (%Y) %T';
+const BOOK = {
   "title": "Code Complete",
   "authors": [
     "Steve McConnell"
@@ -41,12 +44,13 @@ var BOOK = {
 describe('node-info', function() {
 
   it('parses valid isbns', function() {
-    assert.equal('0735619670', main.parseInput('0735619670'));
-    assert.equal('9781566199094', main.parseInput('9781566199094'));
+    assert.equal('0735619670', main.parseInput('0735619670', OPTIONS));
+    assert.equal('9781566199094', main.parseInput('9781566199094', OPTIONS));
+    assert.equal('9781566199094', main.parseInput('978-1566199094', OPTIONS));
   });
 
   it('parses valid isbn filenames', function() {
-    assert.equal('0735619670', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf'));
+    assert.equal('0735619670', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf', OPTIONS));
   });
 
   it('rejects invalid isbns', function() {
@@ -56,22 +60,30 @@ describe('node-info', function() {
       '1234567890abc',
       '1735619670'
     ].forEach(function(badIsbn) {
-      assert.equal(null, main.parseInput(badIsbn));
+      assert.equal(null, main.parseInput(badIsbn, OPTIONS));
     });
   });
 
   it('formats simplest case', function() {
-    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK, FORMAT));
+    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK, FORMAT, OPTIONS));
   });
 
   it('formats to JSON', function() {
-    assert.equal(JSON.stringify(BOOK, null, '\t'), main.formatBook(BOOK, '%JSON'));
+    assert.equal(JSON.stringify(BOOK, null, '\t'), main.formatBook(BOOK, '%J', OPTIONS));
   });
 
   it('does not crash on empty fields', function() {
     var book = BOOK;
     delete book.publishedDate;
-    assert.equal('Steve McConnell - () Code Complete', main.formatBook(book, FORMAT));
+    assert.equal('Steve McConnell - () Code Complete', main.formatBook(book, FORMAT, OPTIONS));
+  });
+
+  it('returns null on empty result', function() {
+    var book = BOOK;
+    delete book.publishedDate;
+    delete book.authors;
+    delete book.title;
+    assert.equal(null, main.formatBook(book, FORMAT, OPTIONS));
   })
 
 });
