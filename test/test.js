@@ -1,5 +1,5 @@
 var assert = require('assert');
-var main = require('../index.js');
+var main = require('../build/main.bundle.js');
 
 const OPTIONS = {
   'q': true

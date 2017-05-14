@@ -1,19 +1,31 @@
 {
   "name": "isbn-info",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Identify a book by its ISBN and output formatted metadata.",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/infojunkie/isbn-info"
   },
-  "author": "",
-  "license": "ISC",
+  "main": "build/main.bundle.js",
+  "bin": {
+    "isbn-info": "build/main.bundle.js"
+  },
+  "scripts": {
+    "build": "babel --presets es2015 src -o build/main.bundle.js",
+    "test": "npm run build && mocha",
+    "start": "node build/main.bundle.js"
+  },
+  "author": "Karim Ratib",
+  "license": "MIT",
   "dependencies": {
     "isbn": "^0.4.0",
     "minimist": "^1.2.0",
     "node-isbn": "^1.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
     "mocha": "^3.3.0"
   }
 }
