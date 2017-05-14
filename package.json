@@ -20,7 +20,7 @@
   "dependencies": {
     "isbn": "^0.4.0",
     "minimist": "^1.2.0",
-    "node-isbn": "^1.2.0"
+    "node-isbn": "git@github.com:infojunkie/node-isbn.git"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
