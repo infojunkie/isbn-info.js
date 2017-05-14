@@ -1,6 +1,7 @@
 var assert = require('assert');
 var main = require('../index.js');
 
+var FORMAT = '%A - (%Y) %T';
 var BOOK = {
   "title": "Code Complete",
   "authors": [
@@ -60,11 +61,17 @@ describe('node-info', function() {
   });
 
   it('formats simplest case', function() {
-    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK, '%A - (%Y) %T'));
+    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK, FORMAT));
   });
 
   it('formats to JSON', function() {
     assert.equal(JSON.stringify(BOOK, null, '\t'), main.formatBook(BOOK, '%JSON'));
+  });
+
+  it('does not crash on empty fields', function() {
+    var book = BOOK;
+    delete book.publishedDate;
+    assert.equal('Steve McConnell - () Code Complete', main.formatBook(book, FORMAT));
   })
 
 });
