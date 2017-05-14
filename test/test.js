@@ -10,7 +10,7 @@ const BOOK = {
   "authors": [
     "Steve McConnell"
   ],
-  "publisher": "O'Reilly Media, Inc.",
+  "publisher": "Microsoft Press",
   "publishedDate": "2004",
   "description": "Features the best practices in the art and...",
   "industryIdentifiers": [
