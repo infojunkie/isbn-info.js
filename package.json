@@ -1,0 +1,19 @@
+{
+  "name": "isbn-info",
+  "version": "1.0.0",
+  "description": "Identify a book by its ISBN and output formatted metadata.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "isbn": "^0.4.0",
+    "minimist": "^1.2.0",
+    "node-isbn": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.3.0"
+  }
+}
