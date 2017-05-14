@@ -64,7 +64,7 @@ describe('node-info', function() {
   });
 
   it('formats to JSON', function() {
-    assert.equal(JSON.stringify(BOOK), main.formatBook(BOOK, '%JSON'));
+    assert.equal(JSON.stringify(BOOK, null, '\t'), main.formatBook(BOOK, '%JSON'));
   })
 
 });

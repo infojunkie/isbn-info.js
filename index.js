@@ -34,14 +34,14 @@ function parseInput(input) {
 
 function formatBook(book, format) {
   const replacements = {
-    '%T': book.title || '<no title>',
-    '%Y': book.publishedDate.match(/\d{4}/) || '<no date>',
-    '%A': book.authors.join(', ') || '<no author>',
-    '%JSON': JSON.stringify(book)
+    '%T': function(book) { return book.title || '<no title>'; },
+    '%Y': function(book) { return book.publishedDate.match(/\d{4}/) || '<no date>'; },
+    '%A': function(book) { return book.authors.join(', ') || '<no author>'; },
+    '%JSON': function(book) { return JSON.stringify(book, null, '\t'); }
   }
   return Object.keys(replacements).reduce(function(result, pattern) {
     const regex = new RegExp(pattern, 'gi');
-    return result.replace(regex, replacements[pattern]);
+    return result.replace(regex, function() { return replacements[pattern](book); });
   }, format);
 }
 
