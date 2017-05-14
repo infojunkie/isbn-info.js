@@ -60,7 +60,11 @@ describe('node-info', function() {
   });
 
   it('formats simplest case', function() {
-    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK));
+    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK, '%A - (%Y) %T'));
   });
+
+  it('formats to JSON', function() {
+    assert.equal(JSON.stringify(BOOK), main.formatBook(BOOK, '%JSON'));
+  })
 
 });
