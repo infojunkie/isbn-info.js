@@ -18,4 +18,5 @@ isbn-info 0735619670
   - `%Y` for publication date
   - `%A` for author(s)
   - `%P` for publisher
+  - '%J' for raw JSON
   - default is `"%A - (%Y) %T"`
