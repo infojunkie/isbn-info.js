@@ -3,9 +3,7 @@
 A console tool to identify a book by its ISBN and output formatted metadata.
 
 ```
-npm install
-npm test
-npm link
+npm i -g isbn-info
 isbn-info 0735619670
 ```
 
@@ -20,3 +18,12 @@ isbn-info 0735619670
   - `%P` for publisher
   - `%J` for raw JSON
   - default is `"%A - (%Y) %T"`
+
+## development
+
+```
+git clone https://github.com/infojunkie/isbn-info
+npm install
+npm test
+npm link
+```
