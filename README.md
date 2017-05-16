@@ -17,5 +17,5 @@ isbn-info 0735619670
   - `%T` for title + subtitle
   - `%Y` for publication date
   - `%A` for author(s)
-  - '%P' for publisher
+  - `%P` for publisher
   - default is `"%A - (%Y) %T"`

@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Identify a book by its ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
   "dependencies": {
     "isbn": "^0.4.0",
     "minimist": "^1.2.0",
-    "node-isbn": "git@github.com:infojunkie/node-isbn.git",
+    "node-isbn": "^1.3.0",
     "sanitize-filename": "^1.6.1"
   },
   "devDependencies": {
