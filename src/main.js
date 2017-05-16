@@ -13,6 +13,7 @@ OPTIONS['_'].forEach(input => {
   const isbn = parseInput(input, OPTIONS);
   if (!isbn) {
     if (!OPTIONS['q']) console.error('Error: Not a valid ISBN', input);
+    return;
   }
 
   isbnApi.resolve(isbn, function(err, book) {
