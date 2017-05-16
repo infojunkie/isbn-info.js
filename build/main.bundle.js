@@ -43,7 +43,7 @@ function parseInput(input, options) {
 }
 
 function formatBook(book, format, options) {
-  https: //developers.google.com/books/docs/v1/reference/volumes
+  // https://developers.google.com/books/docs/v1/reference/volumes
   var replacements = {
     '%T': function T(book) {
       return [].concat(book.title, book.subtitle).filter(function (v) {
@@ -85,6 +85,7 @@ function formatBook(book, format, options) {
   }, format);
 
   // discard empty result
-  if (result === format.replace(/%./g, '')) return null;
+  var empty = new RegExp(Object.keys(replacements).join('|'), 'gi');
+  if (result === format.replace(empty, '')) return null;
   return result;
 }

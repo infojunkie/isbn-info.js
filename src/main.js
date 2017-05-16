@@ -37,7 +37,7 @@ export function parseInput(input, options) {
 }
 
 export function formatBook(book, format, options) {
-  https://developers.google.com/books/docs/v1/reference/volumes
+  // https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
     '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join(' - '),
     '%Y': book => book.publishedDate.match(/\d{4}/)[0],
@@ -69,6 +69,7 @@ export function formatBook(book, format, options) {
   }, format);
 
   // discard empty result
-  if (result === format.replace(/%./g, '')) return null;
+  const empty = new RegExp(Object.keys(replacements).join('|'), 'gi');
+  if (result === format.replace(empty, '')) return null;
   return result;
 }
