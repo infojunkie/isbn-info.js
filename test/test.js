@@ -2,7 +2,8 @@ var assert = require('assert');
 var main = require('../build/main.bundle.js');
 
 const OPTIONS = {
-  'q': true
+  'q': true,
+  's': false
 };
 const FORMAT = '%A - (%Y) %T';
 const BOOK = {
@@ -41,7 +42,7 @@ const BOOK = {
   "canonicalVolumeLink": "http://books.google.es/books/about/Code_Complete.html?hl=&id=QnghAQAAIAAJ"
 }
 
-describe('node-info', function() {
+describe('isbn-info', function() {
 
   it('parses valid isbns', function() {
     assert.equal('0735619670', main.parseInput('0735619670', OPTIONS));
@@ -73,17 +74,25 @@ describe('node-info', function() {
   });
 
   it('does not crash on empty fields', function() {
-    var book = BOOK;
+    var book = Object.assign({}, BOOK);
     delete book.publishedDate;
     assert.equal('Steve McConnell - () Code Complete', main.formatBook(book, FORMAT, OPTIONS));
   });
 
   it('returns null on empty result', function() {
-    var book = BOOK;
+    var book = Object.assign({}, BOOK);
     delete book.publishedDate;
     delete book.authors;
     delete book.title;
     assert.equal(null, main.formatBook(book, FORMAT, OPTIONS));
-  })
+  });
+
+  it('sanitizes output on demand', function() {
+    var book = Object.assign({}, BOOK);
+    book.authors = [ '/Steve\rMcConnell..' ];
+    var options = Object.assign({}, OPTIONS);
+    options['s'] = true;
+    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(book, FORMAT, options));
+  });
 
 });

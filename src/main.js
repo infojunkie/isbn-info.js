@@ -3,6 +3,7 @@ var isbnApi = require('node-isbn');
 var argv = require('minimist')(process.argv.slice(2), { string: '_', boolean: 'q' });
 var isbnInfo = require('isbn').ISBN;
 var path = require('path');
+var sanitize = require('sanitize-filename');
 
 const OPTIONS = argv;
 const FORMAT = argv['f'] || '%A - (%Y) %T';
@@ -12,7 +13,6 @@ OPTIONS['_'].forEach(input => {
   const isbn = parseInput(input, OPTIONS);
   if (!isbn) {
     if (!OPTIONS['q']) console.error('Error: Not a valid ISBN', input);
-    return;
   }
 
   isbnApi.resolve(isbn, function(err, book) {
@@ -20,7 +20,8 @@ OPTIONS['_'].forEach(input => {
       if (!OPTIONS['q']) console.error(err);
     }
     else {
-      console.log(formatBook(book, FORMAT, OPTIONS));
+      const output = formatBook(book, FORMAT, OPTIONS);
+      if (output) console.log(output);
     }
   });
 
@@ -35,19 +36,24 @@ export function parseInput(input, options) {
 }
 
 export function formatBook(book, format, options) {
+  https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
-    '%T': (book) => book.title,
-    '%Y': (book) => book.publishedDate.match(/\d{4}/),
-    '%A': (book) => book.authors.join(', '),
-    '%J': (book) => JSON.stringify(book, null, '\t')
+    '%T': book => book.title ? (book.title + (book.subtitle ? ' - ' + book.substitle : '')) : '',
+    '%Y': book => book.publishedDate.match(/\d{4}/)[0],
+    '%A': book => book.authors.join(', '),
+    '%P': book => book.publisher,
+    '%J': book => JSON.stringify(book, null, '\t')
   }
   const result = Object.keys(replacements).reduce((result, pattern) => {
     const regex = new RegExp(pattern, 'gi');
     return result.replace(regex, function() {
       try {
         const field = replacements[pattern](book);
-        if (!field && !options['q']) console.error('Warning: pattern', pattern, 'empty for', book);
-        return field || '';
+        if (!field) {
+          if (!options['q']) console.error('Warning: pattern', pattern, 'empty for', book);
+          return '';
+        }
+        return options['s'] ? sanitize(field, { replacement: ' ' }).trim() : field;
       }
       catch (e) {
         if (e instanceof TypeError) {
