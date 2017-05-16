@@ -38,7 +38,7 @@ export function parseInput(input, options) {
 export function formatBook(book, format, options) {
   https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
-    '%T': book => book.title ? (book.title + (book.subtitle ? ' - ' + book.substitle : '')) : '',
+    '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join(' - '),
     '%Y': book => book.publishedDate.match(/\d{4}/)[0],
     '%A': book => book.authors.join(', '),
     '%P': book => book.publisher,
