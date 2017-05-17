@@ -61,12 +61,12 @@ function addIsbnIfNotThere(isbn, book) {
 function formatBook(book, format, options) {
   // https://developers.google.com/books/docs/v1/reference/volumes
   var replacements = {
-    '%I10': function I10(book) {
+    '%I0': function I0(book) {
       return book.industryIdentifiers.filter(function (id) {
         return id.type === 'ISBN_10';
       })[0].identifier;
     },
-    '%I13': function I13(book) {
+    '%I3': function I3(book) {
       return book.industryIdentifiers.filter(function (id) {
         return id.type === 'ISBN_13';
       })[0].identifier;

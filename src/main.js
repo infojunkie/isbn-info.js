@@ -50,8 +50,8 @@ export function addIsbnIfNotThere(isbn, book) {
 export function formatBook(book, format, options) {
   // https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
-    '%I10': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
-    '%I13': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13')[0].identifier,
+    '%I0': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
+    '%I3': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13')[0].identifier,
     '%IS': book => book.industryIdentifiers.filter(id => id.type === 'ISSN')[0].identifier,
     '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join(' - '),
     '%Y': book => book.publishedDate.match(/\d{4}/)[0],
