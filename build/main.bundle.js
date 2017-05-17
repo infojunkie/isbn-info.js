@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.parseInput = parseInput;
+exports.addIsbnIfNotThere = addIsbnIfNotThere;
 exports.formatBook = formatBook;
 
 var isbnApi = require('node-isbn');
@@ -23,13 +24,12 @@ OPTIONS['_'].forEach(function (input) {
     if (!OPTIONS['q']) console.error('Error: Not a valid ISBN', input);
     process.exit(1);
   }
-
-  isbnApi.resolve(isbn, function (err, book) {
+  isbnApi.resolve(isbn.codes.source, function (err, book) {
     if (err) {
       if (!OPTIONS['q']) console.error(err);
       process.exit(1);
     } else {
-      var output = formatBook(book, FORMAT, OPTIONS);
+      var output = formatBook(addIsbnIfNotThere(isbn, book), FORMAT, OPTIONS);
       if (output) console.log(output);else process.exit(1);
     }
   });
@@ -39,13 +39,43 @@ function parseInput(input, options) {
   // extract isbn from input
   var isbn = path.basename(input, path.extname(input)).replace('-', '');
 
-  // ignore non ISBN strings
-  return isbnInfo.parse(isbn) ? isbn : null;
+  // ignore invalid ISBN strings
+  return isbnInfo.parse(isbn);
+}
+
+function addIsbnIfNotThere(isbn, book) {
+  var b = Object.assign({}, book);
+  if (!b.industryIdentifiers.filter(function (id) {
+    return id.type === 'ISBN_10';
+  }).length) {
+    b.industryIdentifiers.push({ type: 'ISBN_10', identifier: isbn.asIsbn10() });
+  }
+  if (!b.industryIdentifiers.filter(function (id) {
+    return id.type === 'ISBN_13';
+  }).length) {
+    b.industryIdentifiers.push({ type: 'ISBN_13', identifier: isbn.asIsbn13() });
+  }
+  return b;
 }
 
 function formatBook(book, format, options) {
   // https://developers.google.com/books/docs/v1/reference/volumes
   var replacements = {
+    '%I10': function I10(book) {
+      return book.industryIdentifiers.filter(function (id) {
+        return id.type === 'ISBN_10';
+      })[0].identifier;
+    },
+    '%I13': function I13(book) {
+      return book.industryIdentifiers.filter(function (id) {
+        return id.type === 'ISBN_13';
+      })[0].identifier;
+    },
+    '%IS': function IS(book) {
+      return book.industryIdentifiers.filter(function (id) {
+        return id.type === 'ISSN';
+      })[0].identifier;
+    },
     '%T': function T(book) {
       return [].concat(book.title, book.subtitle).filter(function (v) {
         return v;
@@ -56,6 +86,9 @@ function formatBook(book, format, options) {
     },
     '%A': function A(book) {
       return book.authors.join(', ');
+    },
+    '%D': function D(book) {
+      return book.description;
     },
     '%P': function P(book) {
       return book.publisher;

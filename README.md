@@ -19,9 +19,13 @@ isbn-info isbn1 [isbn2 /path/to/isbn3.ext ...] [-q] [-s] [-f "format string"]
 - `-q` quiet mode: don't output errors
 - `-s` to sanitize the output as a valid filename
 - `-f "format string"` format string:
+  - `%I10` for ISBN-10
+  - `%I13` for ISBN-13
+  - `%IS` for ISSN
   - `%T` for title + subtitle
   - `%Y` for publication date
   - `%A` for author(s)
+  - `%D` for description
   - `%P` for publisher
   - `%J` for raw JSON
   - default is `"%A - (%Y) %T"`

@@ -45,13 +45,13 @@ const BOOK = {
 describe('isbn-info', function() {
 
   it('parses valid isbns', function() {
-    assert.equal('0735619670', main.parseInput('0735619670', OPTIONS));
-    assert.equal('9781566199094', main.parseInput('9781566199094', OPTIONS));
-    assert.equal('9781566199094', main.parseInput('978-1566199094', OPTIONS));
+    assert.equal('0735619670', main.parseInput('0735619670', OPTIONS).codes.source);
+    assert.equal('9781566199094', main.parseInput('9781566199094', OPTIONS).codes.source);
+    assert.equal('9781566199094', main.parseInput('978-1566199094', OPTIONS).codes.source);
   });
 
   it('parses valid isbn filenames', function() {
-    assert.equal('0735619670', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf', OPTIONS));
+    assert.equal('0735619670', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf', OPTIONS).codes.source);
   });
 
   it('rejects invalid isbns', function() {
@@ -85,6 +85,13 @@ describe('isbn-info', function() {
     delete book.authors;
     delete book.title;
     assert.equal(null, main.formatBook(book, FORMAT, OPTIONS));
+  });
+
+  it('add isbn if not present in source', function() {
+    var isbn = main.parseInput('0735619670', OPTIONS);
+    var book = main.addIsbnIfNotThere(isbn, BOOK);
+    assert.deepEqual({ type: 'ISBN_10', identifier: '0735619670' }, book.industryIdentifiers[1]);
+    assert.deepEqual({ type: 'ISBN_13', identifier: '9780735619678' }, book.industryIdentifiers[2]);
   });
 
   it('sanitizes output on demand', function() {
