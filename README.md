@@ -1,6 +1,7 @@
 # isbn-info
 
 [![Travis build](https://travis-ci.org/infojunkie/isbn-info.svg?branch=master)](https://travis-ci.org/infojunkie/isbn-info)
+[![npm version](https://badge.fury.io/js/isbn-info.svg)](https://badge.fury.io/js/isbn-info)
 
 A console tool to identify a book by its ISBN and output formatted metadata.
 
