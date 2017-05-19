@@ -43,7 +43,7 @@ export function addIsbnIfNotThere(isbn, book) {
     { type: 'ISBN_10', identifier: () => isbn.asIsbn10() },
     { type: 'ISBN_13', identifier: () => isbn.asIsbn13() }
   ].forEach(i => {
-    if (!b.industryIdentifiers.filter(id => id.type === i.type).length) {
+    if (!book.industryIdentifiers.filter(id => id.type === i.type).length) {
       b.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
     }
   });

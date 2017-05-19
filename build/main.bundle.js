@@ -51,7 +51,7 @@ function addIsbnIfNotThere(isbn, book) {
     } }, { type: 'ISBN_13', identifier: function identifier() {
       return isbn.asIsbn13();
     } }].forEach(function (i) {
-    if (!b.industryIdentifiers.filter(function (id) {
+    if (!book.industryIdentifiers.filter(function (id) {
       return id.type === i.type;
     }).length) {
       b.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
