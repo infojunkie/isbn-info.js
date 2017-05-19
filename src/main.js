@@ -38,12 +38,16 @@ export function parseInput(input, options) {
 
 export function addIsbnIfNotThere(isbn, book) {
   let b = Object.assign({}, book);
-  if (!b.industryIdentifiers.filter(id => id.type === 'ISBN_10').length) {
-    b.industryIdentifiers.push({ type: 'ISBN_10', identifier: isbn.asIsbn10() });
-  }
-  if (!b.industryIdentifiers.filter(id => id.type === 'ISBN_13').length) {
-    b.industryIdentifiers.push({ type: 'ISBN_13', identifier: isbn.asIsbn13() });
-  }
+
+  [
+    { type: 'ISBN_10', identifier: () => isbn.asIsbn10() },
+    { type: 'ISBN_13', identifier: () => isbn.asIsbn13() }
+  ].forEach(i => {
+    if (!b.industryIdentifiers.filter(id => id.type === i.type).length) {
+      b.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
+    }
+  });
+
   return b;
 }
 

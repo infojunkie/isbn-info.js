@@ -45,16 +45,19 @@ function parseInput(input, options) {
 
 function addIsbnIfNotThere(isbn, book) {
   var b = Object.assign({}, book);
-  if (!b.industryIdentifiers.filter(function (id) {
-    return id.type === 'ISBN_10';
-  }).length) {
-    b.industryIdentifiers.push({ type: 'ISBN_10', identifier: isbn.asIsbn10() });
-  }
-  if (!b.industryIdentifiers.filter(function (id) {
-    return id.type === 'ISBN_13';
-  }).length) {
-    b.industryIdentifiers.push({ type: 'ISBN_13', identifier: isbn.asIsbn13() });
-  }
+
+  [{ type: 'ISBN_10', identifier: function identifier() {
+      return isbn.asIsbn10();
+    } }, { type: 'ISBN_13', identifier: function identifier() {
+      return isbn.asIsbn13();
+    } }].forEach(function (i) {
+    if (!b.industryIdentifiers.filter(function (id) {
+      return id.type === i.type;
+    }).length) {
+      b.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
+    }
+  });
+
   return b;
 }
 
