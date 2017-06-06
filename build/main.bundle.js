@@ -37,7 +37,8 @@ OPTIONS['_'].forEach(function (input) {
 
 function parseInput(input, options) {
   // extract isbn from input
-  var isbn = path.basename(input, path.extname(input)).replace('-', '');
+  var filename = path.basename(input, path.extname(input)).replace('-', '');
+  var isbn = filename.match(/\d{13}|\d{10}|\d{9}X/);
 
   // ignore invalid ISBN strings
   return isbnInfo.parse(isbn);

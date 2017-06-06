@@ -52,6 +52,9 @@ describe('isbn-info', function() {
 
   it('parses valid isbn filenames', function() {
     assert.equal('0735619670', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf', OPTIONS).codes.source);
+    assert.equal('0735619670', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN0735619670.pdf', OPTIONS).codes.source);
+    assert.equal('123456789X', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN123456789X.pdf', OPTIONS).codes.source);
+    assert.equal('9780136091813', main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - (ISBN 9780136091813).pdf', OPTIONS).codes.source);
   });
 
   it('rejects invalid isbns', function() {
@@ -59,7 +62,8 @@ describe('isbn-info', function() {
       'really bad string',
       '1234567890',
       '1234567890abc',
-      '1735619670'
+      '1735619670',
+      'fake title with bad isbn 1234567890'
     ].forEach(function(badIsbn) {
       assert.equal(null, main.parseInput(badIsbn, OPTIONS));
     });

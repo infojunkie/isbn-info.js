@@ -30,7 +30,8 @@ OPTIONS['_'].forEach(input => {
 
 export function parseInput(input, options) {
   // extract isbn from input
-  const isbn = path.basename(input, path.extname(input)).replace('-', '');
+  const filename = path.basename(input, path.extname(input)).replace('-', '');
+  const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/);
 
   // ignore invalid ISBN strings
   return isbnInfo.parse(isbn);

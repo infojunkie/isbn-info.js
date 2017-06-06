@@ -13,10 +13,10 @@ isbn-info 0735619670
 ## command-line options
 
 ```
-isbn-info isbn1 [isbn2 /path/to/isbn3.ext ...] [-q] [-s] [-f "format string"]
+isbn-info isbn1 [isbn2 /path/to/filename-containing-valid-isbn.ext ...] [-q] [-s] [-f "format string"]
 ```
 
-- `isbn1 isbn2 /path/to/isbn3.ext` any number of ISBNs, including pathnames whose filename is a valid ISBN
+- `isbn1 isbn2 /path/to/filename-containing-valid-isbn.ext` any number of ISBNs, including pathnames whose filename contains a valid ISBN
 - `-q` quiet mode: don't output errors
 - `-s` to sanitize the output as a valid filename
 - `-f "format string"` format string:
