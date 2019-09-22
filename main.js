@@ -17,11 +17,11 @@ OPTIONS['_'].forEach(input => {
   }
   isbnApi.resolve(isbn.codes.source, function(err, book) {
     if (err) {
-      if (!OPTIONS['q']) console.error(err);
+      if (!OPTIONS['q']) console.error('Failed to query', input, 'with error:', err);
       process.exit(1);
     }
     else {
-      const output = formatBook(addIsbnIfNotThere(isbn, book), FORMAT, OPTIONS);
+      const output = formatBook(input, addIsbnIfNotThere(isbn, book), FORMAT, OPTIONS);
       if (output) console.log(output); else process.exit(1);
     }
   });
@@ -51,7 +51,7 @@ export function addIsbnIfNotThere(isbn, book) {
   return b;
 }
 
-export function formatBook(book, format, options) {
+export function formatBook(input, book, format, options) {
   // https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
     '%I0': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
@@ -70,15 +70,15 @@ export function formatBook(book, format, options) {
       try {
         const field = replacements[pattern](book);
         if (!field) {
-          if (!options['q']) console.error('Warning: pattern', pattern, 'empty for', book);
-          return '';
+          if (!options['q']) console.error('Warning: pattern', pattern, 'empty for', input);
+          return 'Unknown';
         }
         return options['s'] ? sanitize(field, { replacement: ' ' }).trim() : field;
       }
       catch (e) {
         if (e instanceof TypeError) {
-          if (!options['q']) console.error('Warning: pattern', pattern, 'broke for', book);
-          return '';
+          if (!options['q']) console.error('Warning: pattern', pattern, 'broke for', input);
+          return 'Unknown';
         }
         else {
           throw e;
