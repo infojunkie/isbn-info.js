@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-var isbnApi = require('node-isbn');
-var argv = require('minimist')(process.argv.slice(2), { string: '_', boolean: 'q' });
-var isbnInfo = require('isbn').ISBN;
-var path = require('path');
-var sanitize = require('sanitize-filename');
+import isbnApi from 'node-isbn';
+import minimist from 'minimist';
+import { ISBN as isbnParser } from './isbn';
+import path from 'path';
+import sanitize from 'sanitize-filename';
 
+const argv = minimist(process.argv.slice(2), { string: '_', boolean: 'q' });
 const OPTIONS = argv;
 const FORMAT = argv['f'] || '%A - (%Y) %T';
 
 OPTIONS['_'].forEach(input => {
-
   const isbn = parseInput(input, OPTIONS);
   if (!isbn) {
     if (!OPTIONS['q']) console.error('Error: Not a valid ISBN', input);
@@ -25,20 +25,19 @@ OPTIONS['_'].forEach(input => {
       if (output) console.log(output); else process.exit(1);
     }
   });
-
 });
 
 export function parseInput(input, options) {
   // extract isbn from input
   const filename = path.basename(input, path.extname(input)).replace('-', '');
-  const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/);
+  const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/i);
 
   // ignore invalid ISBN strings
-  return isbnInfo.parse(isbn);
+  return isbnParser.parse(isbn);
 }
 
 export function addIsbnIfNotThere(isbn, book) {
-  let b = Object.assign({}, book);
+  const  b = Object.assign({}, book);
 
   [
     { type: 'ISBN_10', identifier: () => isbn.asIsbn10() },
@@ -58,7 +57,7 @@ export function formatBook(book, format, options) {
     '%I0': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
     '%I3': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13')[0].identifier,
     '%IS': book => book.industryIdentifiers.filter(id => id.type === 'ISSN')[0].identifier,
-    '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join(' - '),
+    '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join('. ').replace(/[\r\n\s]+/g, ' '),
     '%Y': book => book.publishedDate.match(/\d{4}/)[0],
     '%A': book => book.authors.join(', '),
     '%D': book => book.description,

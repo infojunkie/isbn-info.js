@@ -13,7 +13,7 @@ isbn-info 0735619670
 ## command-line options
 
 ```
-isbn-info isbn1 [isbn2 /path/to/filename-containing-valid-isbn.ext ...] [-q] [-s] [-f "format string"]
+isbn-info isbn [-q] [-s] [-f "format string"]
 ```
 
 - `isbn1 isbn2 /path/to/filename-containing-valid-isbn.ext` any number of ISBNs, including pathnames whose filename contains a valid ISBN
@@ -37,5 +37,6 @@ isbn-info isbn1 [isbn2 /path/to/filename-containing-valid-isbn.ext ...] [-q] [-s
 git clone https://github.com/infojunkie/isbn-info
 npm install
 npm test
+npm run query isbn1
 npm link
 ```
