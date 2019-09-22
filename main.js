@@ -90,6 +90,6 @@ export function formatBook(input, book, format, options) {
 
   // discard empty result
   const empty = new RegExp(Object.keys(replacements).join('|'), 'gi');
-  if (result === format.replace(empty, '')) return null;
+  if (result === format.replace(empty, 'Unknown')) return null;
   return result;
 }

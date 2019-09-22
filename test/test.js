@@ -1,11 +1,12 @@
 var assert = require('assert');
 var main = require('../main.js');
 
+const FORMAT = '%A - (%Y) %T';
 const OPTIONS = {
   'q': true,
-  's': false
+  's': false,
+  'f': FORMAT
 };
-const FORMAT = '%A - (%Y) %T';
 const BOOK = {
   "title": "Code Complete",
   "authors": [
@@ -70,17 +71,17 @@ describe('isbn-info', function() {
   });
 
   it('formats simplest case', function() {
-    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(BOOK, FORMAT, OPTIONS));
+    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook('0735619670', BOOK, FORMAT, OPTIONS));
   });
 
   it('formats to JSON', function() {
-    assert.equal(JSON.stringify(BOOK, null, '\t'), main.formatBook(BOOK, '%J', OPTIONS));
+    assert.equal(JSON.stringify(BOOK, null, '\t'), main.formatBook('0735619670', BOOK, '%J', OPTIONS));
   });
 
   it('does not crash on empty fields', function() {
     var book = Object.assign({}, BOOK);
     delete book.publishedDate;
-    assert.equal('Steve McConnell - () Code Complete', main.formatBook(book, FORMAT, OPTIONS));
+    assert.equal('Steve McConnell - (Unknown) Code Complete', main.formatBook('0735619670', book, FORMAT, OPTIONS));
   });
 
   it('returns null on empty result', function() {
@@ -88,7 +89,7 @@ describe('isbn-info', function() {
     delete book.publishedDate;
     delete book.authors;
     delete book.title;
-    assert.equal(null, main.formatBook(book, FORMAT, OPTIONS));
+    assert.equal(null, main.formatBook('0735619670', book, FORMAT, OPTIONS));
   });
 
   it('add isbn if not present in source', function() {
@@ -103,7 +104,7 @@ describe('isbn-info', function() {
     book.authors = [ '/Steve\rMcConnell..' ];
     var options = Object.assign({}, OPTIONS);
     options['s'] = true;
-    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook(book, FORMAT, options));
+    assert.equal('Steve McConnell - (2004) Code Complete', main.formatBook('0735619670', book, FORMAT, options));
   });
 
 });
