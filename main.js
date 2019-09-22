@@ -7,7 +7,7 @@ import sanitize from 'sanitize-filename';
 
 const argv = minimist(process.argv.slice(2), { string: '_', boolean: 'q' });
 const OPTIONS = argv;
-const FORMAT = argv['f'] || '%A - (%Y) %T';
+const FORMAT = argv['f'] || '%A - %T (%Y) %I';
 
 OPTIONS['_'].forEach(input => {
   const isbn = parseInput(input, OPTIONS);
@@ -57,6 +57,7 @@ export function formatBook(input, book, format, options) {
     '%I0': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
     '%I3': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13')[0].identifier,
     '%IS': book => book.industryIdentifiers.filter(id => id.type === 'ISSN')[0].identifier,
+    '%I': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13' || id.type === 'ISBN_10')[0].identifier,
     '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join('. ').replace(/[\r\n\s]+/g, ' '),
     '%Y': book => book.publishedDate.match(/\d{4}/)[0],
     '%A': book => book.authors.join(', '),

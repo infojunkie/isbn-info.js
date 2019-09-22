@@ -23,6 +23,7 @@ isbn-info isbn [-q] [-s] [-f "format string"]
   - `%I0` for ISBN-10
   - `%I3` for ISBN-13
   - `%IS` for ISSN
+  - `%I` for ISBN-13 or ISBN-10, whichever comes first
   - `%T` for title + subtitle
   - `%Y` for publication date
   - `%A` for author(s)
