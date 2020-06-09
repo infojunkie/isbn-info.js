@@ -16,7 +16,6 @@ isbn-info 0735619670
 isbn-info isbn [-q] [-s] [-f "format string"]
 ```
 
-- `isbn1 isbn2 /path/to/filename-containing-valid-isbn.ext` any number of ISBNs, including pathnames whose filename contains a valid ISBN
 - `-q` quiet mode: don't output errors
 - `-s` to sanitize the output as a valid filename
 - `-f "format string"` format string:
@@ -32,12 +31,18 @@ isbn-info isbn [-q] [-s] [-f "format string"]
   - `%J` for raw JSON
   - default is `"%A - (%Y) %T"`
 
+For example, to rename a number of ebooks in your current folder:
+```
+for f in *; do isbn-info -s -q "$f" | xargs -r -I % echo "$f => %.${f##*.}"; done
+```
+
 ## development
 
 ```
 git clone https://github.com/infojunkie/isbn-info
 npm install
 npm test
-npm run query isbn1
+npm build
 npm link
+npm run watch
 ```

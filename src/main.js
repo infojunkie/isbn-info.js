@@ -8,16 +8,17 @@ import sanitize from 'sanitize-filename';
 const argv = minimist(process.argv.slice(2), { string: '_', boolean: 'q' });
 const OPTIONS = argv;
 const FORMAT = argv['f'] || '%A - %T (%Y) %I';
+const QUIET = argv['q'] || false;
 
 OPTIONS['_'].forEach(input => {
   const isbn = parseInput(input, OPTIONS);
   if (!isbn) {
-    if (!OPTIONS['q']) console.error('Error: Not a valid ISBN', input);
+    if (!QUIET) console.error('Error: Not a valid ISBN', input);
     process.exit(1);
   }
   isbnApi.resolve(isbn.codes.source, function(err, book) {
     if (err) {
-      if (!OPTIONS['q']) console.error('Failed to query', input, 'with error:', err);
+      if (!QUIET) console.error('Failed to query', input, 'with error:', err);
       process.exit(1);
     }
     else {
@@ -71,14 +72,14 @@ export function formatBook(input, book, format, options) {
       try {
         const field = replacements[pattern](book);
         if (!field) {
-          if (!options['q']) console.error('Warning: pattern', pattern, 'empty for', input);
+          if (!QUIET) console.error('Warning: pattern', pattern, 'empty for', input);
           return 'Unknown';
         }
-        return options['s'] ? sanitize(field, { replacement: ' ' }).trim() : field;
+        return field;
       }
       catch (e) {
         if (e instanceof TypeError) {
-          if (!options['q']) console.error('Warning: pattern', pattern, 'broke for', input);
+          if (!QUIET) console.error('Warning: pattern', pattern, 'broke for', input);
           return 'Unknown';
         }
         else {
@@ -91,5 +92,7 @@ export function formatBook(input, book, format, options) {
   // discard empty result
   const empty = new RegExp(Object.keys(replacements).join('|'), 'gi');
   if (result === format.replace(empty, 'Unknown')) return null;
-  return result;
+
+  // sanitize result by removing bad filename characters and escaping terminal characters
+  return options['s'] ? sanitize(result, { replacement: ' ' }).trim().replace(/(["\s'$`\\])/g,'\\$1') : result;
 }
