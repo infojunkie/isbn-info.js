@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Identify a book by its ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "minimist": "^1.2.5",
-    "node-isbn": "^1.5.1",
+    "node-isbn": "^1.6.0",
     "sanitize-filename": "^1.6.3"
   },
   "devDependencies": {

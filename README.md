@@ -46,3 +46,5 @@ npm build
 npm link
 npm run watch
 ```
+
+In order to use [ISBNdb](https://isbndb.com/), you need to set an environment variable `ISBNDB_API_KEY` with your API key obtained there.

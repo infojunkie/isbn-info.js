@@ -16,7 +16,7 @@ OPTIONS['_'].forEach(input => {
     if (!QUIET) console.error('Error: Not a valid ISBN', input);
     process.exit(1);
   }
-  isbnApi.resolve(isbn.codes.source, function(err, book) {
+  isbnApi.provider(['isbndb', 'google', 'worldcat']).resolve(isbn.codes.source, function(err, book) {
     if (err) {
       if (!QUIET) console.error('Failed to query', input, 'with error:', err);
       process.exit(1);
