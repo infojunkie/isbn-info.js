@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import isbnApi from 'node-isbn';
 import minimist from 'minimist';
-import { ISBN as isbnParser } from './isbn';
+import { isbn as isbnParser } from 'isbn-utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 

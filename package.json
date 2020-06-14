@@ -17,6 +17,7 @@
   "author": "Karim Ratib",
   "license": "MIT",
   "dependencies": {
+    "isbn-utils": "^1.1.0",
     "minimist": "^1.2.5",
     "node-isbn": "^1.6.0",
     "sanitize-filename": "^1.6.3"
