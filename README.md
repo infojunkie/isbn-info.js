@@ -29,7 +29,7 @@ isbn-info isbn [-q] [-s] [-f "format string"]
   - `%D` for description
   - `%P` for publisher
   - `%J` for raw JSON
-  - default is `"%A - (%Y) %T"`
+  - default is `"%A - %T (%Y) %I"`
 
 For example, to rename a number of ebooks in your current folder:
 ```

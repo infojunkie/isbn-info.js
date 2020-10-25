@@ -46,16 +46,16 @@ const BOOK = {
 describe('isbn-info', function() {
 
   it('parses valid isbns', function() {
-    assert.equal(main.parseInput('0735619670', OPTIONS).codes.source, '0735619670');
-    assert.equal(main.parseInput('9781566199094', OPTIONS).codes.source, '9781566199094');
-    assert.equal(main.parseInput('978-1566199094', OPTIONS).codes.source, '9781566199094');
+    assert.strictEqual(main.parseInput('0735619670', OPTIONS).codes.source, '0735619670');
+    assert.strictEqual(main.parseInput('9781566199094', OPTIONS).codes.source, '9781566199094');
+    assert.strictEqual(main.parseInput('978-1566199094', OPTIONS).codes.source, '9781566199094');
   });
 
   it('parses valid isbn filenames', function() {
-    assert.equal(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf', OPTIONS).codes.source, '0735619670');
-    assert.equal(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN0735619670.pdf', OPTIONS).codes.source, '0735619670');
-    assert.equal(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN123456789X.pdf', OPTIONS).codes.source, '123456789X');
-    assert.equal(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - (ISBN 9780136091813).pdf', OPTIONS).codes.source, '9780136091813');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf', OPTIONS).codes.source, '0735619670');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN0735619670.pdf', OPTIONS).codes.source, '0735619670');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN123456789X.pdf', OPTIONS).codes.source, '123456789X');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - (ISBN 9780136091813).pdf', OPTIONS).codes.source, '9780136091813');
   });
 
   it('rejects invalid isbns', function() {
@@ -66,22 +66,22 @@ describe('isbn-info', function() {
       '1735619670',
       'fake title with bad isbn 1234567890'
     ].forEach(function(badIsbn) {
-      assert.equal(main.parseInput(badIsbn, OPTIONS), null);
+      assert.strictEqual(main.parseInput(badIsbn, OPTIONS), null);
     });
   });
 
   it('formats simplest case', function() {
-    assert.equal(main.formatBook('0735619670', BOOK, FORMAT, OPTIONS), 'Steve McConnell - (2004) Code Complete');
+    assert.strictEqual(main.formatBook('0735619670', BOOK, FORMAT, OPTIONS), 'Steve McConnell - (2004) Code Complete');
   });
 
   it('formats to JSON', function() {
-    assert.equal(main.formatBook('0735619670', BOOK, '%J', OPTIONS), JSON.stringify(BOOK, null, '\t'));
+    assert.strictEqual(main.formatBook('0735619670', BOOK, '%J', OPTIONS), JSON.stringify(BOOK, null, '\t'));
   });
 
   it('does not crash on empty fields', function() {
     var book = Object.assign({}, BOOK);
     delete book.publishedDate;
-    assert.equal(main.formatBook('0735619670', book, FORMAT, OPTIONS), 'Steve McConnell - (Unknown) Code Complete');
+    assert.strictEqual(main.formatBook('0735619670', book, FORMAT, OPTIONS), 'Steve McConnell - (Unknown) Code Complete');
   });
 
   it('returns null on empty result', function() {
@@ -89,22 +89,30 @@ describe('isbn-info', function() {
     delete book.publishedDate;
     delete book.authors;
     delete book.title;
-    assert.equal(main.formatBook('0735619670', book, FORMAT, OPTIONS), null);
+    assert.strictEqual(main.formatBook('0735619670', book, FORMAT, OPTIONS), null);
   });
 
   it('add isbn if not present in source', function() {
     var isbn = main.parseInput('0735619670', OPTIONS);
     var book = main.addIsbnIfNotThere(isbn, BOOK);
-    assert.deepEqual(book.industryIdentifiers[1], { type: 'ISBN_10', identifier: '0735619670' });
-    assert.deepEqual(book.industryIdentifiers[2], { type: 'ISBN_13', identifier: '9780735619678' });
+    assert.deepStrictEqual(book.industryIdentifiers[1], { type: 'ISBN_10', identifier: '0735619670' });
+    assert.deepStrictEqual(book.industryIdentifiers[2], { type: 'ISBN_13', identifier: '9780735619678' });
   });
 
   it('sanitizes output on demand', function() {
     var book = Object.assign({}, BOOK);
+
+    // Make an unsafe title
     book.authors = [ '/Steve\rMcConnell..' ];
     var options = Object.assign({}, OPTIONS);
     options['s'] = true;
-    assert.equal(main.formatBook('0735619670', book, FORMAT, options), 'Steve\\ McConnell..\\ -\\ (2004)\\ Code\\ Complete');
+    assert.strictEqual(main.formatBook('0735619670', book, FORMAT, options), 'Steve\\ McConnell..\\ -\\ (2004)\\ Code\\ Complete');
+
+    // Make a long title
+    book.title = new Array(512).join('A');
+    var options = Object.assign({}, OPTIONS);
+    options['s'] = true;
+    assert.strictEqual(main.formatBook('0735619670', book, FORMAT, options).length, 255);
   });
 
 });

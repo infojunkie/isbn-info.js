@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import isbnApi from 'node-isbn';
 import minimist from 'minimist';
-import { isbn as isbnParser } from 'isbn-utils';
+import isbnParser from 'isbn-utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 
@@ -16,7 +16,7 @@ OPTIONS['_'].forEach(input => {
     if (!QUIET) console.error('Error: Not a valid ISBN', input);
     process.exit(1);
   }
-  isbnApi.provider(['isbndb', 'google', 'worldcat']).resolve(isbn.codes.source, function(err, book) {
+  isbnApi.provider(['google']).resolve(isbn.codes.source, function(err, book) {
     if (err) {
       if (!QUIET) console.error('Failed to query', input, 'with error:', err);
       process.exit(1);
@@ -50,6 +50,12 @@ export function addIsbnIfNotThere(isbn, book) {
   });
 
   return b;
+}
+
+function sanitizeFilename(title) {
+  const sanitized = sanitize(title, { replacement: ' ' }).trim().replace(/(["\s'$`\\])/g,'\\$1');
+  if (sanitized.length < 255) return sanitized;
+  return `${sanitized.slice(0, 127)}…${sanitized.slice(-127)}`;
 }
 
 export function formatBook(input, book, format, options) {
@@ -94,5 +100,5 @@ export function formatBook(input, book, format, options) {
   if (result === format.replace(empty, 'Unknown')) return null;
 
   // sanitize result by removing bad filename characters and escaping terminal characters
-  return options['s'] ? sanitize(result, { replacement: ' ' }).trim().replace(/(["\s'$`\\])/g,'\\$1') : result;
+  return options['s'] ? sanitizeFilename(result) : result;
 }
