@@ -1,34 +1,83 @@
 #!/usr/bin/env node
 import isbnApi from 'node-isbn';
-import minimist from 'minimist';
 import isbnParser from 'isbn-utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
+import meow from 'meow';
+import pkg from '../package.json';
 
-const argv = minimist(process.argv.slice(2), { string: '_', boolean: 'q' });
-const OPTIONS = argv;
-const FORMAT = argv['f'] || '%A - %T (%Y) %I';
-const QUIET = argv['q'] || false;
+const DEFAULT_FORMAT = "%A - %T (%Y) %I";
+const OPTIONS = meow(`
+  Usage: ${pkg.name} <isbn>
 
-OPTIONS['_'].forEach(input => {
-  const isbn = parseInput(input, OPTIONS);
+  Options:
+    -f, --format=FORMAT       output format for book information
+                                %I0 for ISBN-10
+                                %I3 for ISBN-13
+                                %IS for ISSN
+                                %I for ISBN-13 or ISBN-10, whichever comes first
+                                %T for title + subtitle
+                                %Y for publication date
+                                %A for author(s)
+                                %D for description
+                                %P for publisher
+                                %J for raw JSON
+                                default is "${DEFAULT_FORMAT}"
+    -s, --sanitize            sanitize the output as a valid filename
+    -q, --quiet               quiet mode: don't output errors
+    -h, --help                show usage information
+    -v, --version             print version info and exit
+  `, {
+    flags: {
+      format: {
+        type: 'string',
+        alias: 'f',
+        default: DEFAULT_FORMAT
+      },
+      sanitize: {
+        type: 'boolean',
+        alias: 's',
+        default: false
+      },
+      quiet: {
+        type: 'boolean',
+        alias: 'q',
+        default: false
+      },
+      help: {
+        type: 'boolean',
+        alias: 'h'
+      },
+      version: {
+        type: 'boolean',
+        alias: 'v'
+      }
+    }
+  }
+);
+const QUIET = OPTIONS.flags['quiet'];
+const FORMAT = OPTIONS.flags['format'];
+const SANITIZE = OPTIONS.flags['sanitize'];
+
+OPTIONS.input.slice(0, 1).forEach(input => {
+  const isbn = parseInput(input);
   if (!isbn) {
-    if (!QUIET) console.error('Error: Not a valid ISBN', input);
+    if (!QUIET) console.error(`Not a valid ISBN: ${input}`);
     process.exit(1);
   }
-  isbnApi.provider(['google']).resolve(isbn.codes.source, function(err, book) {
+  isbnApi.resolve(isbn.codes.source, function(err, book) {
     if (err) {
-      if (!QUIET) console.error('Failed to query', input, 'with error:', err);
+      if (!QUIET) console.error(`Failed to query ${input} with error: ${err}`);
       process.exit(1);
     }
     else {
-      const output = formatBook(input, addIsbnIfNotThere(isbn, book), FORMAT, OPTIONS);
+      const output = formatBook(input, addIsbnIfNotThere(isbn, book), FORMAT, QUIET, SANITIZE);
       if (output) console.log(output); else process.exit(1);
     }
   });
 });
 
-export function parseInput(input, options) {
+export function parseInput(input) {
   // extract isbn from input
   const filename = path.basename(input, path.extname(input)).replace('-', '');
   const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/i);
@@ -58,7 +107,7 @@ function sanitizeFilename(title) {
   return `${sanitized.slice(0, 127)}…${sanitized.slice(-127)}`;
 }
 
-export function formatBook(input, book, format, options) {
+export function formatBook(input, book, format, quiet, sanitize) {
   // https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
     '%I0': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
@@ -78,14 +127,14 @@ export function formatBook(input, book, format, options) {
       try {
         const field = replacements[pattern](book);
         if (!field) {
-          if (!QUIET) console.error('Warning: pattern', pattern, 'empty for', input);
+          if (!quiet) console.error('Pattern', pattern, 'empty for', input);
           return 'Unknown';
         }
         return field;
       }
       catch (e) {
         if (e instanceof TypeError) {
-          if (!QUIET) console.error('Warning: pattern', pattern, 'broke for', input);
+          if (!quiet) console.error('Pattern', pattern, 'broke for', input);
           return 'Unknown';
         }
         else {
@@ -100,5 +149,5 @@ export function formatBook(input, book, format, options) {
   if (result === format.replace(empty, 'Unknown')) return null;
 
   // sanitize result by removing bad filename characters and escaping terminal characters
-  return options['s'] ? sanitizeFilename(result) : result;
+  return sanitize ? sanitizeFilename(result) : result;
 }

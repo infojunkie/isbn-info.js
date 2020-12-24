@@ -1,33 +1,38 @@
 {
   "name": "isbn-info",
-  "version": "0.0.15",
+  "version": "1.0.0",
   "description": "Identify a book by its ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
     "url": "https://github.com/infojunkie/isbn-info"
   },
   "bin": {
-    "isbn-info": "./lib/main.js"
+    "isbn-info": "./lib/index.js"
   },
   "scripts": {
     "test": "mocha --require @babel/register",
-    "build": "babel src -d lib",
-    "watch": "babel --watch src -d lib"
+    "build": "babel src -d lib"
   },
-  "author": "Karim Ratib",
+  "author": "Karim Ratib <karim.ratib@gmail.com> (https://github.com/infojunkie)",
   "license": "MIT",
+  "files": [
+    "LICENSE.txt",
+    "lib/*"
+  ],
   "dependencies": {
     "isbn-utils": "^1.1.0",
-    "minimist": "^1.2.5",
+    "meow": "^8.0.0",
     "node-isbn": "^1.6.0",
     "sanitize-filename": "^1.6.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/node": "^7.10.1",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/register": "^7.10.1",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/plugin-transform-strict-mode": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
+    "babel-plugin-inline-json-import": "^0.3.2",
     "mocha": "^6.2.3"
   }
 }
