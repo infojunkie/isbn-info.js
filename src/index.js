@@ -26,7 +26,7 @@ const OPTIONS = meow(`
     -s, --sanitize            sanitize the output as a valid filename
     -q, --quiet               quiet mode: don't output errors
     -h, --help                show usage information
-    -v, --version             print version info and exit
+    -v, --version             show version information
   `, {
     flags: {
       format: {
@@ -58,6 +58,10 @@ const OPTIONS = meow(`
 const QUIET = OPTIONS.flags['quiet'];
 const FORMAT = OPTIONS.flags['format'];
 const SANITIZE = OPTIONS.flags['sanitize'];
+
+if (!OPTIONS.input.length) {
+  OPTIONS.showHelp();
+}
 
 OPTIONS.input.slice(0, 1).forEach(input => {
   const isbn = parseInput(input);

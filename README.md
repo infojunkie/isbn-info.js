@@ -31,12 +31,12 @@ isbn-info 0735619670
     -s, --sanitize            sanitize the output as a valid filename
     -q, --quiet               quiet mode: don't output errors
     -h, --help                show usage information
-    -v, --version             print version info and exit
+    -v, --version             show version information
 ```
 
-For example, to rename a number of ebooks in your current folder:
+For example, to rename the ebooks with ISBN filenames in your current folder:
 ```
-for f in *; do isbn-info -s -q "$f" | xargs -r -I % echo "$f => %.${f##*.}"; done
+find . | egrep "^./[0-9]+X?\..*" | while read f; do echo "$f"; isbn-info -s -q "$f" | xargs -r -I % mv "$f" "%.${f##*.}"; done
 ```
 
 ## Development
