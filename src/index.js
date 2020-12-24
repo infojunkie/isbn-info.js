@@ -59,7 +59,14 @@ const QUIET = OPTIONS.flags['quiet'];
 const FORMAT = OPTIONS.flags['format'];
 const SANITIZE = OPTIONS.flags['sanitize'];
 
-if (!OPTIONS.input.length) {
+// https://stackoverflow.com/a/54577682/209184
+function isMochaRunning(context) {
+  return ['afterEach','after','beforeEach','before','describe','it'].every(function(functionName){
+    return context[functionName] instanceof Function;
+  });
+}
+
+if (!OPTIONS.input.length && !isMochaRunning(global)) {
   OPTIONS.showHelp();
 }
 
