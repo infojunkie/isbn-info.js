@@ -114,6 +114,7 @@ describe('isbn-info', function() {
     `.trim();
     const output = main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true);
     assert.strictEqual(output.length, 255);
-    assert.match(output, /Integer dictum sapien dignissim venenatis consequat$/);
+    const expected = /Integer dictum sapien dignissim venenatis consequat$/;
+    assert(output.match(expected), `Expected value to match regex:\n\n${output}\n\n${expected}`);
   });
 });
