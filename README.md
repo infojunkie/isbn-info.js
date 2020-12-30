@@ -43,8 +43,8 @@ isbn-bulk-rename /path/to/folder
 ```
 
 ### Nautilus script
-To wire `isbn-bulk-rename` into a [GNOME Nautilus script](http://g-scripts.sourceforge.net/):
-- Create a `~/.xsessionrc` file with the following contents:
+To wire `isbn-bulk-rename` into a GNOME Nautilus script:
+- Create the following `~/.xsessionrc` file:
 ```
 if [ -d "$HOME/.nvm" ]; then
   # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -55,7 +55,7 @@ if [ -d "$HOME/.nvm" ]; then
 fi
 ```
 - Restart your X session `sudo systemctl restart display-manager` (on modern Ubuntu systems)
-- Create the following [Nautilus script](https://askubuntu.com/a/236415/54112)
+- Create the following [Nautilus script](https://askubuntu.com/a/236415/54112) with an explanatory filename:
 ```
 #!/bin/sh
 isbn-bulk-rename "$@"
