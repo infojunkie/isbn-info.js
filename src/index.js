@@ -2,7 +2,6 @@
 import isbnApi from 'node-isbn';
 import isbnParser from 'isbn-utils';
 import path from 'path';
-import sanitize from 'sanitize-filename';
 import meow from 'meow';
 import pkg from '../package.json';
 
@@ -113,9 +112,23 @@ export function addIsbnIfNotThere(isbn, book) {
 }
 
 function sanitizeFilename(title) {
-  const sanitized = sanitize(title, { replacement: ' ' }).trim().replace(/(["\s'$`\\])/g,'\\$1');
-  if (sanitized.length < 255) return sanitized;
-  return `${sanitized.slice(0, 127)}…${sanitized.slice(-127)}`;
+  const truncated = title.length <= 255 ? title : `${title.slice(0, 127)}…${title.slice(-127)}`;
+
+  // Copied from https://github.com/parshap/node-sanitize-filename because their truncation is buggy.
+  const illegalRe = /[\/\?<>\\:\*\|"]/g;
+  const controlRe = /[\x00-\x1f\x80-\x9f]/g;
+  const reservedRe = /^\.+$/;
+  const windowsReservedRe = /^(con|prn|aux|nul|com[0-9]|lpt[0-9])(\..*)?$/i;
+  const windowsTrailingRe = /[\. ]+$/;
+  const replacement = ' ';
+
+  return truncated
+    .replace(illegalRe, replacement)
+    .replace(controlRe, replacement)
+    .replace(reservedRe, replacement)
+    .replace(windowsReservedRe, replacement)
+    .replace(windowsTrailingRe, replacement)
+    .trim()
 }
 
 export function formatBook(input, book, format, quiet, sanitize) {

@@ -8,9 +8,10 @@ A console tool to identify a book by its ISBN and output formatted metadata.
 ```
 npm i -g isbn-info
 isbn-info 0735619670
+// => Steve McConnell - Code Complete (2004) 9780735619678
 ```
 
-## Console options
+## Usage
 
 ```
   Usage: isbn-info <isbn>
@@ -34,9 +35,9 @@ isbn-info 0735619670
     -v, --version             show version information
 ```
 
-For example, to rename the ebooks with ISBN filenames in your current folder:
+To rename the ebooks with ISBN filenames in a given folder:
 ```
-find . | egrep "^./[0-9]+X?\..*" | while read f; do echo "$f"; isbn-info -s -q "$f" | xargs -r -I % mv "$f" "%.${f##*.}"; done
+isbn-bulk-rename /path/to/folder
 ```
 
 ## Development
@@ -45,6 +46,6 @@ find . | egrep "^./[0-9]+X?\..*" | while read f; do echo "$f"; isbn-info -s -q "
 git clone https://github.com/infojunkie/isbn-info
 npm install
 npm test
-npm run link
 npm run build
+npm run link
 ```

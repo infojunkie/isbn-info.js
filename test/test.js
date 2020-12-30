@@ -105,10 +105,15 @@ describe('isbn-info', function() {
 
     // Make an unsafe title
     book.authors = [ '/Steve\rMcConnell..' ];
-    assert.strictEqual(main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true), 'Steve\\ McConnell..\\ -\\ (2004)\\ Code\\ Complete');
+    assert.strictEqual(main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true), 'Steve McConnell.. - (2004) Code Complete');
 
     // Make a long title
-    book.title = new Array(512).join('A');
-    assert.strictEqual(main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true).length, 255);
+    book.authors = [ 'Steve McConnell' ];
+    book.title = `
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend, elit ut molestie consequat, elit lectus eleifend sem, sit amet malesuada nulla justo et nisi. Ut ut risus mi. Nam quis risus ac eros lacinia maximus in eu nisl. Fusce a interdum augue. Sed blandit neque sed scelerisque rutrum. Ut eros mauris, efficitur non purus facilisis, convallis eleifend lectus. Sed pretium mauris lectus, ac posuere metus blandit ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus elementum, metus in imperdiet molestie, tortor nisl convallis odio, vitae sollicitudin nisl est vitae nulla. Fusce lobortis aliquam quam id ullamcorper. Maecenas in ipsum id ligula tempor scelerisque nec ac mauris. Mauris porttitor nunc sem, vel pellentesque dui gravida lobortis. Maecenas faucibus tristique egestas. Integer dictum sapien dignissim venenatis consequat
+    `.trim();
+    const output = main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true);
+    assert.strictEqual(output.length, 255);
+    assert.match(output, /Integer dictum sapien dignissim venenatis consequat$/);
   });
 });
