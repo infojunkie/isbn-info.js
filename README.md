@@ -13,6 +13,7 @@ isbn-info 0735619670
 
 ## Usage
 
+### isbn-info
 ```
   Usage: isbn-info <isbn>
 
@@ -35,9 +36,30 @@ isbn-info 0735619670
     -v, --version             show version information
 ```
 
+### isbn-bulk-rename
 To rename the ebooks with ISBN filenames in a given folder:
 ```
 isbn-bulk-rename /path/to/folder
+```
+
+### Nautilus script
+To wire `isbn-bulk-rename` into a [GNOME Nautilus script](http://g-scripts.sourceforge.net/):
+- Create a `~/.xsessionrc` file with the following contents:
+```
+if [ -d "$HOME/.nvm" ]; then
+  # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  export NVM_DIR="$HOME/.nvm"
+
+  # This loads nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+```
+- Restart your X session `sudo systemctl restart display-manager` (on modern Ubuntu systems)
+- Create the following [Nautilus script](https://askubuntu.com/a/236415/54112)
+```
+#!/bin/sh
+isbn-bulk-rename "$@"
+notify-send -t 3000 "ISBN renaming done"
 ```
 
 ## Development
