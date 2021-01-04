@@ -112,9 +112,12 @@ export function addIsbnIfNotThere(isbn, book) {
 }
 
 function sanitizeFilename(title) {
-  const truncated = title.length <= 255 ? title : `${title.slice(0, 127)}…${title.slice(-127)}`;
+  // Unicode-aware string length because filesystems expect 255 _bytes_.
+  const ellipsis = '…';
+  const truncation = ((255 - Buffer.byteLength(ellipsis)) / 2) >> 0;
+  const truncated = Buffer.byteLength(title) <= 255 ? title : `${title.slice(0, truncation)}${ellipsis}${title.slice(-truncation)}`;
 
-  // Copied from https://github.com/parshap/node-sanitize-filename because their truncation is buggy.
+  // Copied from https://github.com/parshap/node-sanitize-filename because we do our own truncation.
   const illegalRe = /[\/\?<>\\:\*\|"]/g;
   const controlRe = /[\x00-\x1f\x80-\x9f]/g;
   const reservedRe = /^\.+$/;
