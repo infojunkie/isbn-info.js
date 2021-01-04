@@ -44,6 +44,7 @@ isbn-bulk-rename /path/to/folder
 
 ### Nautilus script
 To wire `isbn-bulk-rename` into a GNOME Nautilus script:
+- Install `libnotify-bin` or equivalent package that includes the `notify-send` command
 - Create the following `~/.xsessionrc` file:
 ```
 if [ -d "$HOME/.nvm" ]; then

@@ -2,7 +2,7 @@ var assert = require('assert');
 var main = require('../src/index.js');
 
 const OPTIONS = {
-  input: ['0735619670'],
+  input: ['0735619670.pdf'],
   flags: {
     'quiet': true,
     'sanitize': false,
@@ -47,16 +47,16 @@ const BOOK = {
 
 describe('isbn-info', function() {
   it('parses valid isbns', function() {
-    assert.strictEqual(main.parseInput('0735619670').codes.source, '0735619670');
-    assert.strictEqual(main.parseInput('9781566199094').codes.source, '9781566199094');
-    assert.strictEqual(main.parseInput('978-1566199094').codes.source, '9781566199094');
+    assert.strictEqual(main.parseInput('0735619670').source, '0735619670');
+    assert.strictEqual(main.parseInput('9781566199094').source, '9781566199094');
+    assert.strictEqual(main.parseInput('978-1566199094').source, '9781566199094');
   });
 
   it('parses valid isbn filenames', function() {
-    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf').codes.source, '0735619670');
-    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN0735619670.pdf').codes.source, '0735619670');
-    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN123456789X.pdf').codes.source, '123456789X');
-    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - (ISBN 9780136091813).pdf').codes.source, '9780136091813');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/0735619670.pdf').source, '0735619670');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN0735619670.pdf').source, '0735619670');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - ISBN123456789X.pdf').source, '123456789X');
+    assert.strictEqual(main.parseInput('/media/rokanan/music/PRACTICE/SHEETS-TODO/fake title 1971 - (ISBN 9780136091813).pdf').source, '9780136091813');
   });
 
   it('rejects invalid isbns', function() {
@@ -105,7 +105,7 @@ describe('isbn-info', function() {
 
     // Make an unsafe title
     book.authors = [ '/Steve\rMcConnell..' ];
-    assert.strictEqual(main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true), 'Steve McConnell.. - (2004) Code Complete');
+    assert.strictEqual(main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true), 'Steve McConnell.. - (2004) Code Complete.pdf');
 
     // Make a long title
     book.authors = [ 'Steve McConnell' ];
@@ -114,7 +114,7 @@ describe('isbn-info', function() {
     `.trim();
     const output = main.formatBook(OPTIONS.input[0], book, OPTIONS.flags['format'], OPTIONS.flags['quiet'], true);
     assert.strictEqual(output.length, 255);
-    const expected = /Integer dictum sapien dignissim venenatis consequat$/;
+    const expected = /Integer dictum sapien dignissim venenatis consequat.pdf$/;
     assert(output.match(expected), `Expected value to match regex:\n\n${output}\n\n${expected}`);
   });
 });

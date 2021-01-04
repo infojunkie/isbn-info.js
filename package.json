@@ -22,7 +22,7 @@
     "src/isbn-bulk-rename.sh"
   ],
   "dependencies": {
-    "isbn-utils": "^1.1.0",
+    "isbn3": "^1.1.6",
     "meow": "^8.0.0",
     "node-isbn": "^1.6.0"
   },

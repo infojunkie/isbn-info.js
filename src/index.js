@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import isbnApi from 'node-isbn';
-import isbnParser from 'isbn-utils';
+import isbnParser from 'isbn3';
 import path from 'path';
 import meow from 'meow';
 import pkg from '../package.json';
@@ -75,7 +75,7 @@ OPTIONS.input.slice(0, 1).forEach(input => {
     if (!QUIET) console.error(`Not a valid ISBN: ${input}`);
     process.exit(1);
   }
-  isbnApi.resolve(isbn.codes.source, function(err, book) {
+  isbnApi.resolve(isbn.source, function(err, book) {
     if (err) {
       if (!QUIET) console.error(`Failed to query ${input} with error: ${err}`);
       process.exit(1);
@@ -93,15 +93,15 @@ export function parseInput(input) {
   const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/i);
 
   // ignore invalid ISBN strings
-  return isbnParser.parse(isbn);
+  return isbn ? isbnParser.parse(isbn[0]) : null;
 }
 
 export function addIsbnIfNotThere(isbn, book) {
   const  b = Object.assign({}, book);
 
   [
-    { type: 'ISBN_10', identifier: () => isbn.asIsbn10() },
-    { type: 'ISBN_13', identifier: () => isbn.asIsbn13() }
+    { type: 'ISBN_10', identifier: () => isbn.isbn10 },
+    { type: 'ISBN_13', identifier: () => isbn.isbn13 }
   ].forEach(i => {
     if (!book.industryIdentifiers.filter(id => id.type === i.type).length) {
       b.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
@@ -172,6 +172,5 @@ export function formatBook(input, book, format, quiet, sanitize) {
   const empty = new RegExp(Object.keys(replacements).join('|'), 'gi');
   if (result === format.replace(empty, 'Unknown')) return null;
 
-  // sanitize result by removing bad filename characters and escaping terminal characters
-  return sanitize ? sanitizeFilename(result) : result;
+  return sanitize ? sanitizeFilename(result + path.extname(input)) : result;
 }
