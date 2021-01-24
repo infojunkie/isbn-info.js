@@ -1,5 +1,5 @@
 var assert = require('assert');
-var main = require('../src/index.js');
+var main = require('../src/isbn-info.js');
 
 const OPTIONS = {
   input: ['0735619670.pdf'],

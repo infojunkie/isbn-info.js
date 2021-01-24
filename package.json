@@ -7,10 +7,11 @@
     "url": "https://github.com/infojunkie/isbn-info"
   },
   "bin": {
-    "isbn-info": "./lib/index.js",
+    "isbn-info": "./lib/isbn-info.js",
     "isbn-bulk-rename": "./src/isbn-bulk-rename.sh"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "test": "mocha --require @babel/register",
     "build": "babel src -d lib"
   },
@@ -22,9 +23,13 @@
     "src/isbn-bulk-rename.sh"
   ],
   "dependencies": {
+    "axios": "^0.21.1",
     "isbn3": "^1.1.6",
     "meow": "^8.0.0",
     "node-isbn": "^1.6.0"
+  },
+  "resolutions": {
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
