@@ -97,18 +97,19 @@ export function parseInput(input) {
 }
 
 export function addIsbnIfNotThere(isbn, book) {
-  const  b = Object.assign({}, book);
-
+  if (!book.industryIdentifiers) {
+    book.industryIdentifiers = [];
+  }
   [
     { type: 'ISBN_10', identifier: () => isbn.isbn10 },
     { type: 'ISBN_13', identifier: () => isbn.isbn13 }
   ].forEach(i => {
     if (!book.industryIdentifiers.filter(id => id.type === i.type).length) {
-      b.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
+      book.industryIdentifiers.push({ type: i.type, identifier: i.identifier() });
     }
   });
 
-  return b;
+  return book;
 }
 
 function sanitizeFilename(title) {
