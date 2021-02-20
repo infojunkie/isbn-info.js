@@ -36,6 +36,17 @@ isbn-info 0735619670
     -v, --version             show version information
 ```
 
+### isbn-extract
+To extract ISBN from an ebook's contents:
+```
+isbn-extract /path/to/ebook
+// => First found ISBN string or exit code 1
+```
+
+Supported formats:
+- pdf, epub using `mutool`
+- djvu using `djvutxt`
+
 ### isbn-bulk-rename
 To rename the ebooks with ISBN filenames in a given folder:
 ```
