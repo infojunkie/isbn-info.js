@@ -13,7 +13,6 @@ while getopts p:h option; do
       ;;
     h)
       usage
-      exit 1
       ;;
   esac
 done
@@ -26,10 +25,10 @@ trap "{ rm -f "$tmp_file"; }" EXIT
 
 case "$file" in
   *.pdf | *.epub)
-    $(mutool convert -o "$tmp_file" "$file" 1-$pages)
+    $(mutool convert -o "$tmp_file" "$file" 1-$pages &>/dev/null)
     ;;
   *.djvu)
-    $(djvutxt -page=1-$pages "$file" > "$tmp_file")
+    $(djvutxt -page=1-$pages "$file" > "$tmp_file" &>/dev/null)
     ;;
   *)
     echo "Unhandled file type $file" 1>&2
@@ -38,5 +37,5 @@ case "$file" in
 esac
 
 # https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
-regex="(?:ISBN(?:-1[03])?:?\s+)?(?=[0-9X]{10}|(?=(?:[0-9]+[-\s]){3})[-\s0-9X]{13}|97[89][0-9]{10}|(?=(?:[0-9]+[-\s]){4})[-\s0-9]{17})(?:97[89][-\s]?)?[0-9]{1,5}[-\s]?[0-9]+[-\s]?[0-9]+[-\s]?[0-9X]"
-node -e "fs=require('fs'); t=fs.readFileSync('/dev/stdin', 'utf-8'); if (m=t.match(/$regex/)) console.log(m[0]); else process.exit(1);" < "$tmp_file"
+regex="(?:ISBN(?:-1[03])?:?\s+)?((?=[0-9X]{10}|(?=(?:[0-9]+[-\s]){3})[-\s0-9X]{13}|97[89][0-9]{10}|(?=(?:[0-9]+[-\s]){4})[-\s0-9]{17})(?:97[89][-\s]?)?[0-9]{1,5}[-\s]?[0-9]+[-\s]?[0-9]+[-\s]?[0-9X])"
+NODE_PATH="$(npm root -g):${NODE_PATH-}" node -e "f=require('fs'); i=require('isbn3'); t=f.readFileSync('/dev/stdin', 'utf-8'); if (m=t.match(/$regex/)) console.log(i.asIsbn13(m[1])); else process.exit(1);" < "$tmp_file"

@@ -39,8 +39,8 @@ isbn-info 0735619670
 ### isbn-extract
 To extract ISBN from an ebook's contents:
 ```
-isbn-extract /path/to/ebook
-// => First found ISBN string or exit code 1
+isbn-extract -p 10 /path/to/ebook
+// => First found ISBN string within first 10 pages, or exit code 1
 ```
 
 Supported formats:
@@ -51,6 +51,11 @@ Supported formats:
 To rename the ebooks with ISBN filenames in a given folder:
 ```
 isbn-bulk-rename /path/to/folder
+```
+
+To rename the ebooks by extracting ISBNs from the content in a given folder:
+```
+isbn-bulk-rename -x /path/to/folder
 ```
 
 ### Nautilus script
