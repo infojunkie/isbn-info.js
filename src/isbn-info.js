@@ -3,11 +3,10 @@ import isbnApi from 'node-isbn';
 import isbnParser from 'isbn3';
 import path from 'path';
 import meow from 'meow';
-import pkg from '../package.json';
 
 const DEFAULT_FORMAT = "%A - %T (%Y) %I";
 const OPTIONS = meow(`
-  Usage: ${pkg.name} <isbn>
+  Usage: ${path.basename(process.argv[1])} <isbn>
 
   Options:
     -f, --format=FORMAT       output format for book information
@@ -65,7 +64,7 @@ function isMochaRunning(context) {
   });
 }
 
-if (!OPTIONS.input.length && !isMochaRunning(global)) {
+if (OPTIONS.flags['help'] || (!OPTIONS.input.length && !isMochaRunning(global))) {
   OPTIONS.showHelp();
 }
 
