@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: [-p <pages>] [-h] [-t isbn,issn] $(basename $BASH_SOURCE) /path/to/ebook" 1>&2; exit 1;
+  echo "Usage: $(basename $BASH_SOURCE) [-p <pages>] [-h] [-t isbn,issn] /path/to/ebook" 1>&2; exit 1;
 }
 
 pages=10
@@ -43,4 +43,4 @@ case "$file" in
     ;;
 esac
 
-isbn-extract --type "$type" < "$tmp_file" | head -n 1
+isbn-detect --type "$type" < "$tmp_file" | head -n 1

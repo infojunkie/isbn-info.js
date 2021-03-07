@@ -8,8 +8,8 @@
   },
   "bin": {
     "isbn-info": "./lib/isbn-info.js",
-    "isbn-extract": "./lib/isbn-extract.js",
-    "isbn-extract-ebook": "./src/isbn-extract-ebook.sh",
+    "isbn-detect": "./lib/isbn-detect.js",
+    "isbn-extract": "./src/isbn-extract.sh",
     "isbn-bulk-rename": "./src/isbn-bulk-rename.sh"
   },
   "scripts": {

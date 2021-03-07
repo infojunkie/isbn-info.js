@@ -37,10 +37,10 @@ isbn-info 0735619670
 ```
 
 ### isbn-extract
-To extract ISBN from an ebook's contents:
+To extract ISBN / ISSN from an ebook's contents:
 ```
-isbn-extract -p 10 /path/to/ebook
-// => First found ISBN string within first 10 pages, or exit code 1
+isbn-extract [-p <pages>] [-h] [-t isbn,issn] /path/to/ebook
+// => First found match or exit code 1
 ```
 
 Supported formats:

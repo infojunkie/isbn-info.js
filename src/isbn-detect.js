@@ -75,4 +75,5 @@ const matches = [...text.matchAll(regexes[OPTIONS.flags['type']])]
 }, []);
 
 // Print out unique set of matches.
+if (!matches.length) process.exit(1);
 [...new Set(matches)].forEach(match => { console.log(match); });
