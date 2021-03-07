@@ -44,7 +44,8 @@ isbn-extract -p 10 /path/to/ebook
 ```
 
 Supported formats:
-- pdf, epub using `mutool`
+- epub using `mutool`
+- pdf using `pdftotext`
 - djvu using `djvutxt`
 
 ### isbn-bulk-rename

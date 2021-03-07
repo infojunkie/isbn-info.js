@@ -28,8 +28,11 @@ tmp_file=$(mktemp -t isbn-XXXXXXXX.txt)
 trap "{ rm -f "$tmp_file"; }" EXIT
 
 case "$file" in
-  *.pdf | *.epub)
+   *.epub)
     $(mutool convert -o "$tmp_file" "$file" 1-$pages &>/dev/null)
+    ;;
+  *.pdf)
+    $(pdftotext -f 1 -l "$pages" "$file" "$tmp_file" &>/dev/null)
     ;;
   *.djvu)
     $(djvutxt -page=1-$pages "$file" > "$tmp_file" &>/dev/null)
@@ -40,4 +43,4 @@ case "$file" in
     ;;
 esac
 
-isbn-extract --type "$type" < "$tmp_file"
+isbn-extract --type "$type" < "$tmp_file" | head -n 1

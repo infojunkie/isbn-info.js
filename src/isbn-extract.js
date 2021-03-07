@@ -10,7 +10,7 @@ const OPTIONS = meow(`
 
   Options:
     -t, --type=TYPE           type of information to extract:
-                                ISBN
+                                ISBN (default)
                                 ISSN
     -h, --help                show usage information
     -v, --version             show version information
@@ -54,23 +54,25 @@ if (OPTIONS.flags['help'] || (!text.length) && !isMochaRunning(global)) {
 }
 
 // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
-const regexIsbn = /\bISBN(?:-1[03])?:? ((?=[0-9X]{10}\b|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}\b)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]\b)/g;
-const regexIssn = /\bISSN:? ((?:\d{4})-?(?:\d{3})(?:[\dX]))\b/g;
-const matches = [...text.matchAll(OPTIONS.flags['type'] === 'isbn' ? regexIsbn : regexIssn)]
-  .map(match => match[1])
-  .reduce((matches, match) => {
-    if (OPTIONS.flags['type'] === 'isbn') {
-      const p = isbnParser.parse(match);
-      if (p) {
-        matches.push(p.isbn13);
-      }
-    } else {
-      if (issn(match)) {
-        matches.push(match);
-      }
+const regexes = {
+  'isbn': /\b(?:ISBN|International Standard Book Number)(?:[-–]1[03])?:?\s+((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X]\b)/gi,
+  'issn': /\b(?:ISSN|International Standard Serial Number):?\s+((?:\d{4})[-–]?(?:\d{3})(?:[\dX]))\b/gi
+}
+const matches = [...text.matchAll(regexes[OPTIONS.flags['type']])]
+.map(match => match[1].replace(/–/g, '-'))
+.reduce((matches, candidate) => {
+  if (OPTIONS.flags['type'] === 'isbn') {
+    const p = isbnParser.parse(candidate);
+    if (p) {
+      matches.push(p.isbn13);
     }
-    return matches;
-  }, []);
+  } else {
+    if (issn(match)) {
+      matches.push(candidate);
+    }
+  }
+  return matches;
+}, []);
 
 // Print out unique set of matches.
 [...new Set(matches)].forEach(match => { console.log(match); });
