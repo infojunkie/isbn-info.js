@@ -28,7 +28,7 @@ tmp_file=$(mktemp -t isbn-XXXXXXXX.txt)
 trap "{ rm -f "$tmp_file"; }" EXIT
 
 case "$file" in
-   *.epub)
+  *.epub)
     $(mutool convert -o "$tmp_file" "$file" 1-$pages &>/dev/null)
     ;;
   *.pdf)
