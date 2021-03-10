@@ -1,101 +1,118 @@
 #!/usr/bin/env node
 import isbnApi from 'node-isbn';
-import isbnParser from 'isbn3';
+import isbn3 from 'isbn3';
 import path from 'path';
 import meow from 'meow';
-
-const DEFAULT_FORMAT = "%A - %T (%Y) %I";
-const OPTIONS = meow(`
-  Usage: ${path.basename(process.argv[1])} <isbn>
-
-  Options:
-    -f, --format=FORMAT       output format for book information
-                                %I0 for ISBN-10
-                                %I3 for ISBN-13
-                                %IS for ISSN
-                                %I for ISBN-13 or ISBN-10, whichever comes first
-                                %T for title + subtitle
-                                %Y for publication date
-                                %A for author(s)
-                                %D for description
-                                %P for publisher
-                                %J for raw JSON
-                                default is "${DEFAULT_FORMAT}"
-    -s, --sanitize            sanitize the output as a valid filename
-    -q, --quiet               quiet mode: don't output errors
-    -h, --help                show usage information
-    -v, --version             show version information
-  `, {
-    flags: {
-      format: {
-        type: 'string',
-        alias: 'f',
-        default: DEFAULT_FORMAT
-      },
-      sanitize: {
-        type: 'boolean',
-        alias: 's',
-        default: false
-      },
-      quiet: {
-        type: 'boolean',
-        alias: 'q',
-        default: false
-      },
-      help: {
-        type: 'boolean',
-        alias: 'h'
-      },
-      version: {
-        type: 'boolean',
-        alias: 'v'
-      }
-    }
-  }
-);
-const QUIET = OPTIONS.flags['quiet'];
-const FORMAT = OPTIONS.flags['format'];
-const SANITIZE = OPTIONS.flags['sanitize'];
+import regeneratorRuntime from 'regenerator-runtime';
 
 // https://stackoverflow.com/a/54577682/209184
 function isMochaRunning(context) {
-  return ['afterEach','after','beforeEach','before','describe','it'].every(function(functionName){
+  return ['afterEach','after','beforeEach','before','describe','it'].every(function(functionName) {
     return context[functionName] instanceof Function;
   });
 }
 
-if (OPTIONS.flags['help'] || (!OPTIONS.input.length && !isMochaRunning(global))) {
-  OPTIONS.showHelp();
-}
+if (!isMochaRunning(global)) {
+  const DEFAULT_FORMAT = '%A - %T (%Y) %I';
+  const OPTIONS = meow(`
+    Usage: ${path.basename(process.argv[1])} <isbn>
 
-OPTIONS.input.slice(0, 1).forEach(input => {
-  const isbn = parseInput(input);
-  if (!isbn) {
-    if (!QUIET) console.error(`Not a valid ISBN: ${input}`);
-    process.exit(1);
+    Options:
+      -f, --format=FORMAT       output format for book information
+                                  %I0 for ISBN-10
+                                  %I3 for ISBN-13
+                                  %IS for ISSN
+                                  %I for ISBN-13 or ISBN-10, whichever comes first
+                                  %T for title + subtitle
+                                  %Y for publication date
+                                  %A for author(s)
+                                  %D for description
+                                  %P for publisher
+                                  %J for raw JSON
+                                  default is "${DEFAULT_FORMAT}"
+      -s, --sanitize            sanitize the output as a valid filename
+      -q, --quiet               quiet mode: don't output errors
+      -h, --help                show usage information
+      -v, --version             show version information
+    `, {
+      flags: {
+        format: {
+          type: 'string',
+          alias: 'f',
+          default: DEFAULT_FORMAT
+        },
+        sanitize: {
+          type: 'boolean',
+          alias: 's',
+          default: false
+        },
+        quiet: {
+          type: 'boolean',
+          alias: 'q',
+          default: false
+        },
+        help: {
+          type: 'boolean',
+          alias: 'h'
+        },
+        version: {
+          type: 'boolean',
+          alias: 'v'
+        }
+      }
+    }
+  );
+
+  if (OPTIONS.flags['help'] || !OPTIONS.input.length) {
+    OPTIONS.showHelp();
   }
-  isbnApi.resolve(isbn.source, function(err, book) {
-    if (err) {
-      if (!QUIET) console.error(`Failed to query ${input} with error: ${err}`);
+
+  (async () => {
+    try {
+      const output = await isbnInfo(OPTIONS.input[0], OPTIONS);
+      console.log(output);
+    } catch (e) {
+      if (!OPTIONS.flags['quiet']) {
+        console.error(e.message);
+      }
       process.exit(1);
     }
-    else {
-      const output = formatBook(input, addIsbnIfNotThere(isbn, book), FORMAT, QUIET, SANITIZE);
-      if (output) console.log(output); else process.exit(1);
+  })();
+}
+
+export async function isbnInfo(input, OPTIONS) {
+  return new Promise(function(resolve, reject) {
+    const isbn = parseInput(input);
+    if (!isbn) {
+      reject(new Error(`Not a valid ISBN: ${input}`));
+    } else {
+      isbnApi.resolve(isbn.source, function(err, book) {
+        if (err) {
+          reject(new Error(`Failed to query ${input} with error: ${err}`));
+        }
+        else {
+          try {
+            resolve(formatBook(input, addIsbnIfNotThere(isbn, book), OPTIONS));
+          }
+          catch (e) {
+            reject(e);
+          }
+        }
+      });
     }
   });
-});
+}
 
-export function parseInput(input) {
-  // extract isbn from input
+function parseInput(input) {
+  // Extract ISBN from input.
   const filename = path.basename(input, path.extname(input)).replace('-', '');
   const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/i);
 
-  // ignore invalid ISBN strings
-  return isbn ? isbnParser.parse(isbn[0]) : null;
+  // Ignore invalid ISBN strings.
+  return isbn ? isbn3.parse(isbn[0]) : null;
 }
 
-export function addIsbnIfNotThere(isbn, book) {
+function addIsbnIfNotThere(isbn, book) {
   if (!book.industryIdentifiers) {
     book.industryIdentifiers = [];
   }
@@ -134,7 +151,7 @@ function sanitizeFilename(title) {
     .trim()
 }
 
-export function formatBook(input, book, format, quiet, sanitize) {
+function formatBook(input, book, OPTIONS) {
   // https://developers.google.com/books/docs/v1/reference/volumes
   const replacements = {
     '%I0': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_10')[0].identifier,
@@ -154,14 +171,14 @@ export function formatBook(input, book, format, quiet, sanitize) {
       try {
         const field = replacements[pattern](book);
         if (!field) {
-          if (!quiet) console.error('Pattern', pattern, 'empty for', input);
+          if (!OPTIONS.flags['quiet']) console.warn(`Pattern ${pattern} empty for ${input}`);
           return 'Unknown';
         }
         return field;
       }
       catch (e) {
         if (e instanceof TypeError) {
-          if (!quiet) console.error('Pattern', pattern, 'broke for', input);
+          if (!OPTIONS.flags['quiet']) console.warn(`Pattern ${pattern} broke for ${input}`);
           return 'Unknown';
         }
         else {
@@ -169,11 +186,11 @@ export function formatBook(input, book, format, quiet, sanitize) {
         }
       }
     });
-  }, format);
+  }, OPTIONS.flags['format']);
 
-  // discard empty result
+  // Discard empty result.
   const empty = new RegExp(Object.keys(replacements).join('|'), 'gi');
-  if (result === format.replace(empty, 'Unknown')) return null;
+  if (result === OPTIONS.flags['format'].replace(empty, 'Unknown')) return null;
 
-  return sanitize ? sanitizeFilename(result + path.extname(input)) : result;
+  return OPTIONS.flags['sanitize'] ? sanitizeFilename(result + path.extname(input)) : result;
 }

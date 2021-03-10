@@ -1,0 +1,38 @@
+Xuan Guang
+Department of Information and Probability
+School of Mathematical Sciences
+Nankai University
+Tianjin, People’s Republic of China
+Zhen Zhang
+Ming Hsieh Department of Electrical
+Engineering Viterbi School
+of Engineering
+University of Southern California
+Los Angeles, CA, USA
+ISSN 2191-5768
+ISSN 2191-5776 (electronic)
+ISBN 978-1-4939-0587-4
+ISBN 978-1-4939-0588-1 (eBook)
+DOI 10.1007/978-1-4939-0588-1
+Springer New York Heidelberg Dordrecht London
+Library of Congress Control Number: 2014933580
+© The Author(s) 2014
+This work is subject to copyright. All rights are reserved by the Publisher, whether the whole or part of
+the material is concerned, specifically the rights of translation, reprinting, reuse of illustrations, recitation,
+broadcasting, reproduction on microfilms or in any other physical way, and transmission or information
+storage and retrieval, electronic adaptation, computer software, or by similar or dissimilar methodology
+now known or hereafter developed. Exempted from this legal reservation are brief excerpts in connection
+with reviews or scholarly analysis or material supplied specifically for the purpose of being entered
+and executed on a computer system, for exclusive use by the purchaser of the work. Duplication of
+this publication or parts thereof is permitted only under the provisions of the Copyright Law of the
+Publisher’s location, in its current version, and permission for use must always be obtained from Springer.
+Permissions for use may be obtained through RightsLink at the Copyright Clearance Center. Violations
+are liable to prosecution under the respective Copyright Law.
+The use of general descriptive names, registered names, trademarks, service marks, etc. in this publication
+does not imply, even in the absence of a specific statement, that such names are exempt from the relevant
+protective laws and regulations and therefore free for general use.
+While the advice and information in this book are believed to be true and accurate at the date of pub-
+lication, neither the authors nor the editors nor the publisher can accept any legal responsibility for any
+errors or omissions that may be made. The publisher makes no warranty, express or implied, with respect
+to the material contained herein.
+Printed on acid-free paper

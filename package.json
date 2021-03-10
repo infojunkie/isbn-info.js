@@ -26,13 +26,13 @@
     "src/isbn-extract.sh"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.13.10",
     "axios": "^0.21.1",
     "isbn3": "^1.1.8",
     "issn": "^1.0.6",
     "jsonld-parser": "^0.6.1",
     "meow": "^8.1.2",
-    "node-isbn": "^1.6.0",
-    "regenerator": "^0.14.7"
+    "node-isbn": "^1.6.0"
   },
   "resolutions": {
     "axios": "^0.21.1"
@@ -41,10 +41,12 @@
     "@babel/cli": "^7.12.17",
     "@babel/core": "^7.12.17",
     "@babel/node": "^7.12.17",
+    "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/plugin-transform-strict-mode": "^7.12.13",
     "@babel/preset-env": "^7.12.17",
     "@babel/register": "^7.12.13",
     "babel-plugin-inline-json-import": "^0.3.2",
-    "mocha": "^6.2.3"
+    "mocha": "^6.2.3",
+    "sinon": "^9.2.4"
   }
 }
