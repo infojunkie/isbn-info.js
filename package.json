@@ -25,6 +25,8 @@
     "src/isbn-bulk-rename.sh",
     "src/isbn-extract.sh"
   ],
+  "engines" : { "node" : ">=12" },
+  "engineStrict": true,
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "axios": "^0.21.1",
