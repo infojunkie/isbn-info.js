@@ -3,7 +3,6 @@ import isbnApi from 'node-isbn';
 import isbn3 from 'isbn3';
 import path from 'path';
 import meow from 'meow';
-import regeneratorRuntime from 'regenerator-runtime';
 
 // https://stackoverflow.com/a/54577682/209184
 function isMochaRunning(context) {

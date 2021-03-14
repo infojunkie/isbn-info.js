@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A console tool to identify a book by its ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
     "src/isbn-bulk-rename.sh",
     "src/isbn-extract.sh"
   ],
-  "engines" : { "node" : ">=12" },
+  "engines": {
+    "node": ">=12"
+  },
   "engineStrict": true,
   "dependencies": {
     "@babel/runtime": "^7.13.10",
