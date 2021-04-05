@@ -2,12 +2,13 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $(basename $BASH_SOURCE) [-p <pages>] [-h] [-t isbn,issn] /path/to/ebook" 1>&2; exit 1;
+  echo "Usage: $(basename $BASH_SOURCE) [-p <pages>] [-h] [-a] [-t isbn,issn] /path/to/ebook" 1>&2; exit 1;
 }
 
 pages=10
 type=isbn
-while getopts p:ht: option; do
+all=false
+while getopts ap:ht: option; do
   case "$option" in
     p)
       pages=$OPTARG
@@ -17,6 +18,9 @@ while getopts p:ht: option; do
       ;;
     t)
       type=$OPTARG
+      ;;
+    a)
+      all=true
       ;;
   esac
 done
@@ -43,4 +47,9 @@ case "$file" in
     ;;
 esac
 
-isbn-detect --type "$type" < "$tmp_file" | head -n 1
+detected=$(isbn-detect --type "$type" < "$tmp_file")
+if $all; then
+  echo "$detected"
+else
+  echo "$detected" | head -n 1
+fi
