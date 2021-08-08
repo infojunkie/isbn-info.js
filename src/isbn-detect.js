@@ -62,8 +62,8 @@ if (!isMochaRunning(global)) {
 export function isbnDetect(text, OPTIONS) {
   // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
   const regexes = {
-    'isbn': /\b(?:ISBN|International Standard Book Number)(?:[-–]1[03])?:?\s+((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X]\b)/gi,
-    'issn': /\b(?:ISSN|International Standard Serial Number):?\s+((?:\d{4})[-–]?(?:\d{3})(?:[\dX]))\b/gi
+    'isbn': /\b((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X]\b)/gi,
+    'issn': /\b((?:\d{4})[-–]?(?:\d{3})(?:[\dX]))\b/gi
   }
   const matches = [...text.matchAll(regexes[OPTIONS.flags['type']])]
   .map(match => match[1].replace(/–/g, '-'))
