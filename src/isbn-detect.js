@@ -60,10 +60,13 @@ if (!isMochaRunning(global)) {
 }
 
 export function isbnDetect(text, OPTIONS) {
+  // Adapted from
   // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
   const regexes = {
-    'isbn': /\b((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X]\b)/gi,
-    'issn': /\b((?:\d{4})[-–]?(?:\d{3})(?:[\dX]))\b/gi
+    // https://regex101.com/r/K0owvd/2/
+    'isbn': /\b(?:(?:ISBN|International Standard Book Number)(?:[-–]1[03])?:?\s+)?((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X]\b)/gi,
+    // https://regex101.com/r/Sl0PX3/2/
+    'issn': /\b(?:(?:ISSN|International Standard Serial Number):?\s+)?((?:\d{4})[-–]?(?:\d{3})(?:[\dX]))\b/gi
   }
   const matches = [...text.matchAll(regexes[OPTIONS.flags['type']])]
   .map(match => match[1].replace(/–/g, '-'))
@@ -71,7 +74,8 @@ export function isbnDetect(text, OPTIONS) {
     if (OPTIONS.flags['type'] === 'isbn') {
       const p = isbn3.parse(candidate);
       if (p) {
-        matches.push(p.isbn13);
+        if (p.isIsbn13) matches.push(p.isbn13);
+        if (p.isIsbn10) matches.push(p.isbn10);
       }
     } else {
       if (issn(candidate)) {

@@ -1,0 +1,182 @@
+Series Editor: Ron Baecker, University of Toronto
+Andrew Sixsmith, Simon Fraser University
+
+MARQUEZ-CHIN • ET AL
+
+Series ISSN: 2162-7258
+
+Brain-Computer Interfaces
+Neurorehabilitation of Voluntary Movement after
+Stroke and Spinal Cord Injury
+
+BRAIN-COMPUTER INTERFACES
+
+Stroke and spinal cord injury often result in paralysis with serious negative consequences to the independence
+and quality of life of those who sustain them. For these individuals, rehabilitation provides the means to
+regain lost function. Rehabilitation following neurological injuries has undergone revolutionary changes,
+enriched by neuroplasticity. Neuroplastic-based interventions enhance the efficacy and continue to guide
+the development of new rehabilitation strategies. This book presents three important technology-based
+rehabilitation interventions that follow the concepts of neuroplasticity. The book also discusses clinical results
+related to their efficacy. These interventions are: functional electrical stimulation therapy, which produces
+coordinated muscle contractions allowing people with paralysis to perform functional movements with
+rich sensory feedback; robot-assisted therapy, which uses robots to assist, resist, and guide movements with
+increased intensity while also reducing the physical burden on therapists; and brain–computer interfaces,
+which make it possible to verify the presence of motor-related brain activity during rehabilitation. Further,
+the book presents the combined use of these three technologies to illustrate some of the emerging approaches
+to the neurorehabilitation of voluntary movement. The authors share their practical experiences obtained
+during the development and clinical testing of functional electrical stimulation therapy controlled by a brain–
+computer interface as an intervention to restore reaching and grasping.
+
+		
+
+Cesar Marquez-Chin, University Health Network and University of Toronto
+Naaz Kapadia-Desai, University Health Network and University of Toronto
+Sukhvinder Kalsi-Ryan, University Health Network and University of Toronto
+
+About SYNTHESIS
+
+store.morganclaypool.com
+
+MORGAN & CLAYPOOL
+
+This volume is a printed version of a work that appears in the Synthesis
+Digital Library of Engineering and Computer Science. Synthesis
+books provide concise, original presentations of important research and
+development topics, published quickly, in digital and print formats.
+
+Ron Baecker and Andrew Sixsmith, Series Editors
+
+Brain–Computer Interfaces
+
+Neurorehabilitation of Voluntary Movement after
+Stroke and Spinal Cord Injury
+
+iii
+
+Synthesis Lectures on
+Assistive, Rehabilitative, and
+Health-Preserving Technologies
+Editors
+Ronald M. Baecker, University of Toronto
+Andrew Sixsmith, Simon Fraser University and AGE-WELL NCE
+This series provides state-of-the-art overview lectures on assistive technologies. We take a broad
+view of this expanding field, defining it as information and communications technologies used in
+diagnosis and treatment, prosthetics that compensate for impaired capabilities, methods for rehabilitating or restoring function, and protective interventions that enable individuals to stay healthy
+for longer periods of time.
+Each overview introduces the medical context in which technology is used, presents and
+explains the technology; reviews problems and opportunities, successes and failures in the development and use of technology; and synthesizes promising opportunities for future progress. Authors
+include significant material based on their own work, while surveying the broad landscape of an
+area’s research, development, and deployment progress and success.
+Brain–Computer Interfaces: Neurorehabilitation of Voluntary Movement after Stroke and Spinal
+Cord Injury
+Cesar Marquez-Chin, Naaz Kapadia-Desai, and Sukhvinder Kalsi-Ryan
+Ending Medicine’s Chronic Dysfunction: Tools and Standards for Medical Decision Making
+Lawrence L. Weed (1923–2017) and Lincoln Weed
+Research Advances in ADHD and Technology
+Franceli L. Cibrian, Gillian R. Hayes, and Kimberley D. Lakes
+AgeTech, Cognitive Health, and Dementia
+Andrew Sixsmith, Judith Sixsmith, Mei Lan Fang, and Becky Horst
+Interactive Technologies and Autism, Second Edition
+Julie A. Kientz, Gillian R. Hayes, Matthew S. Goodwin, Mirko Gelsomini, and Gregory D. Abowd
+
+iv
+
+Zero-Effort Technologies: Considerations, Challenges, and Use in Health, Wellness, and Rehabiliation, Second Edition
+Jennifer Boger, Victoria Young, Jesse Hoey, Tizneem Jiancaro, and Alex Mihailidis
+Human Factors in Healthcare: A Field Guide to Continuous Improvement
+Avi Parush, Debi Parush, and Roy Ilan
+Assistive Technology Design for Intelligence Augmentation
+Stefan Carmien
+Body Tracking in Healthcare
+Kenton O’Hara, Cecily Morrison, Abigail Sellen, Nadia Bianchi-Berthouze, and Cathy Craig
+Clear Speech: Technologies that Enable the Expression and Reception of Language
+Frank Rudzicz
+Designed Technologies for Healthy Aging
+Claudia B. Rebola
+Fieldwork for Healthcare: Guidance for Investigating Human Factors in Computing Systems
+Dominic Furniss, Rebecca Randell, Aisling Ann O’Kane, Svetlena Taneva, Helena Mentis, and
+Ann Blandford
+Fieldwork for Healthcare: Case Studies Investigating Human Factors in Computing Systems
+Dominic Furniss, Aisling Ann O’Kane, Rebecca Randell, Svetlena Taneva, Helena Mentis, and
+Ann Blandford
+Interactive Technologies for Autism
+Julie A. Kientz, Matthew S. Goodwin, Gillian R. Hayes, and Gregory D. Abowd
+Patient-Centered Design of Cognitive Assistive Technology for Traumatic Brain Injury Telerehabilitation
+Elliot Cole
+Zero Effort Technologies: Considerations, Challenges, and Use in Health,Wellness, and Rehabilitation
+Alex Mihailidis, Jennifer Boger, Jesse Hoey, and Tizneem Jiancaro
+Design and the Digital Divide: Insights from 40 Years in Computer Support for Older and Disabled People
+Alan F. Newell
+
+Copyright © 2021 by Morgan & Claypool
+All rights reserved. No part of this publication may be reproduced, stored in a retrieval system, or transmitted in
+any form or by any means—electronic, mechanical, photocopy, recording, or any other except for brief quotations in printed reviews, without the prior permission of the publisher.
+Brain–Computer Interfaces for Neurorehabilitation of Voluntary Movement after Stroke and Spinal
+Cord Injury
+Cesar Marquez-Chin, Naaz Kapadia-Desai, and Sukhvinder Kalsi-Ryan
+www.morganclaypool.com
+
+ISBN: 9781636391311 print
+ISBN: 9781636391328 ebook
+ISBN: 9781636391335 hardcover
+DOI 10.2200/S01090ED1V01Y202104ARH017
+SYNTHESIS LECTURES ON ASSISTIVE, REHABILITATIVE, AND HEALTH-PRESERVING
+TECHNOLOGIES
+Lecture #17
+Series Editors: Ron Baecker, University of Toronto and Andrew Sixsmith, Simon Fraser University and
+AGE-WELL NCE
+
+Series ISSN 2162-7258 Print 2162-7266 Electronic
+
+Brain–Computer Interfaces
+
+Neurorehabilitation of Voluntary Movement after
+Stroke and Spinal Cord Injury
+Cesar Marquez-Chin
+
+KITE Research Institute, Toronto Rehabilitation Institute—University Health Network and University of Toronto
+
+Naaz Kapadia-Desai
+
+KITE Research Institute, Toronto Rehabilitation Institute—University Health Network and University of Toronto
+
+Sukhvinder Kalsi-Ryan
+
+KITE Research Institute, Toronto Rehabilitation Institute—University Health Network and University of Toronto
+
+SYNTHESIS LECTURES ON ASSISTIVE, REHABILITATIVE, AND HEALTHPRESERVING TECHNOLOGIES #17
+
+M
+&C
+
+MORGAN
+
+& CLAYPOOL PUBLISHERS
+
+viii
+
+ABSTRACT
+
+Stroke and spinal cord injury often result in paralysis with serious negative consequences to the
+independence and quality of life of those who sustain them. For these individuals, rehabilitation
+provides the means to regain lost function. Rehabilitation following neurological injuries has
+undergone revolutionary changes, enriched by neuroplasticity. Neuroplastic-based interventions
+enhance the efficacy and continue to guide the development of new rehabilitation strategies.
+This book presents three important technology-based rehabilitation interventions that follow the
+concepts of neuroplasticity. The book also discusses clinical results related to their efficacy. These
+interventions are: functional electrical stimulation therapy, which produces coordinated muscle
+contractions allowing people with paralysis to perform functional movements with rich sensory
+feedback; robot-assisted therapy, which uses robots to assist, resist, and guide movements with
+increased intensity while also reducing the physical burden on therapists; and brain–computer
+interfaces, which make it possible to verify the presence of motor-related brain activity during
+rehabilitation. Further, the book presents the combined use of these three technologies to illustrate
+some of the emerging approaches to the neurorehabilitation of voluntary movement. The authors
+share their practical experiences obtained during the development and clinical testing of functional
+electrical stimulation therapy controlled by a brain–computer interface as an intervention to restore
+reaching and grasping.
+
+KEYWORDS
+
+stroke, spinal cord injury, neurorehabilitation, voluntary movement, functional electrical stimulation, robot-assisted therapy, brain–computer interfaces
+
+

@@ -1,0 +1,275 @@
+Web Archiving
+
+Julien Masanès
+
+Web Archiving
+With 28 Figures and 6 Tables
+
+ABC
+
+Author
+Julien Masanès
+European Web Archive
+25 rue des envierges
+75020 Paris, France
+julien.masanes@bnf.fr
+
+ACM Computing Classification (1998): H.3, H.4, I.7, K.4
+Library of Congress Control Number: 2006930407
+ISBN-10 3-540-23338-5 Springer Berlin Heidelberg New York
+ISBN-13 978-3-540-23338-1 Springer Berlin Heidelberg New York
+This work is subject to copyright. All rights are reserved, whether the whole or part of the material
+is concerned, specifically the rights of translation, reprinting, reuse of illustrations, recitation, broadcasting, reproduction on microfilm or in any other way, and storage in data banks. Duplication of
+this publication or parts thereof is permitted only under the provisions of the German Copyright
+Law of September 9, 1965, in its current version, and permission for use must always be obtained
+from Springer, Violations are liable for prosecution under the German Copyright Law.
+Springer is a part of Springer Science+Business Media
+springer.com
+c Springer-Verlag Berlin Heidelberg 2006
+
+The use of general descriptive names, registered names, trademarks, etc. in this publication does not
+imply, even in the absence of a specific statement, that such names are exempt from the relevant
+protective laws and regulations and therefore free for general use.
+Typesetting by the author and SPi
+Cover design: KünkelLopka, Heidelberg
+Printed on acid-free paper
+
+SPIN: 11307549/45/ 2145/ SPi 5 4 3 2 1 0
+
+Contents
+1
+
+Web Archiving: Issues and Methods ................................................ 1
+Julien Masanés
+1.1 Introduction ................................................................................ 1
+1.2 Heritage, Society, and the Web .................................................. 2
+1.3 Web Characterization in Relation to Preservation ................... 11
+1.4 New Methods for a New Medium............................................ 18
+1.5 Current Initiatives Overview .................................................... 40
+1.6 Conclusion................................................................................46
+References ................................................................................46
+
+2
+
+Web Use and Web Studies............................................................... 55
+Steve Jones and Camille Johnson
+2.1 Summary .................................................................................. 55
+2.2 Content Analysis ...................................................................... 56
+2.3 Surveys ..................................................................................... 58
+2.4 Rhetorical Analysis .................................................................. 59
+2.5 Discourse Analysis ................................................................... 60
+2.6 Visual Analysis ........................................................................ 61
+2.7 Ethnography ............................................................................. 63
+2.8 Network Analysis ..................................................................... 64
+2.9 Ethical Considerations.............................................................. 65
+2.10 Conclusion ................................................................................ 66
+References ................................................................................67
+
+3.
+
+Selection for Web Archives ............................................................. 71
+Julien Masanés
+3.1 Introduction .............................................................................. 71
+3.2 Defining a Selection Policy...................................................... 72
+3.3 Issues and Concepts ................................................................. 76
+3.4 Selection Process...................................................................... 82
+3.5 Documentation ......................................................................... 89
+3.6 Conclusion................................................................................ 89
+References ................................................................................90
+
+VI
+
+Contents
+
+4.
+
+Copying Websites ............................................................................. 93
+Xavier Roche
+4.1 Introduction – The Art of Copying Websites ........................... 93
+4.2 The Parser................................................................................. 95
+4.3 Fetching Document ................................................................ 102
+4.4 Create an Autonomous, Navigable Copy ............................... 107
+4.5 Handling Updates ................................................................... 109
+4.6 Conclusion.............................................................................. 112
+Reference ................................................................................112
+
+5
+
+Archiving the Hidden Web............................................................ 115
+Julien Masanès
+5.1 Introduction ............................................................................ 115
+5.2 Finding At Least One Path to Documents.............................. 116
+5.3 Characterizing the Hidden Web ............................................. 119
+5.4 Client Side Hidden Web Archiving........................................ 121
+5.5 Crawler-Server Collaboration ................................................ 123
+5.6 Archiving Documentary Gateways ........................................125
+5.7 Conclusion.............................................................................. 127
+References...............................................................................128
+
+6
+
+Access and Finding Aids .................................................................131
+Thorsteinn Hallgrimsson
+6.1 Introduction ............................................................................131
+6.2 Registration ............................................................................133
+6.3 Indexing and Search Engines .................................................135
+6.4 Access Tools and User Interface ............................................137
+6.5 Case Studies ...........................................................................146
+6.6 Acknowledgements ................................................................ 151
+References...............................................................................151
+
+7
+
+Mining Web Collections................................................................. 153
+Andreas Aschenbrenner and Andreas Rauber
+7.1 Introduction ............................................................................ 153
+7.2 Material for Web Archives..................................................... 155
+7.3 Other Types of Information.................................................... 160
+7.4 Use Cases ............................................................................... 161
+7.5 Conclusion ..............................................................................172
+References...............................................................................174
+
+Contents
+
+VII
+
+8
+
+The Long-Term Preservation of Web Content............................ 177
+Michael Day
+8.1 Introduction ............................................................................ 177
+8.2 The Challenge of Long-Term Digital Preservation................ 178
+8.3 Developing Trusted Digital Repositories ............................... 181
+8.4 Digital Preservation Strategies ............................................... 184
+8.5 Preservation Metadata ............................................................ 189
+8.6 Digital Preservation and the Web........................................... 193
+8.7 Conclusion ..............................................................................194
+8.8 Acknowledgements ................................................................ 194
+References...............................................................................194
+
+9
+
+Year-by-Year: From an Archive of the Internet to an Archive
+on the Internet................................................................................. 201
+Michele Kimpton and Jeff Ubois
+9.1 Introduction ............................................................................ 201
+9.2 Background: Early Internet Publishing .................................. 202
+9.3 1996: Launch of the Internet Archive .................................... 202
+9.4 1997: Link Structure and Tape Robots................................... 203
+9.5 1998: Getting Archive Data Onto (Almost) Every Desktop .. 204
+9.6 1999: From Tape to Disk, A New Crawler, and Moving
+Images .................................................................................... 205
+9.7 2000: Building Thematic Web Collections ............................206
+9.8 2001: Public Access with the Wayback Machine:
+The 9/11 Archive ...................................................................207
+9.9 2002: The Library of Alexandria, The Bookmobile,
+and Copyrights ....................................................................... 208
+9.10 2003: Extending Our Reach via National Libraries and
+Educational Institutions ......................................................... 210
+9.11 2004: And the European Archive and the Petabox ................ 211
+9.12 The Future .............................................................................. 211
+References...............................................................................212
+
+10 Small Scale Academic Web Archiving: DACHS.......................... 213
+Hanno E. Lecher
+10.1 Why Small Scale Academic Archiving? ................................ 213
+10.2 Digital Archive for Chinese Studies....................................... 214
+10.3 Lessons Learned: Summing Up ............................................. 223
+10.4 Useful Resources.................................................................... 224
+
+List of Acronyms.................................................................................... 227
+Index........................................................................................................ 229
+
+2 Web Use and Web Studies
+Steve Jones and Camille Johnson
+University of Illinois at Chicago
+sjones@uic.edu
+
+2.1 Summary
+In 2002, the Online Computer Library Center (OCLC) estimated that over
+three million publicly accessible websites existed on the World Wide Web
+(O’Neill et al. 2003, para. 9). In the material world of information, this
+number would approximate from 14 to 28 million books, matching or exceeding the number of volumes held by most of the world’s largest libraries. This overwhelming collection of information represents an endless,
+accessible supply of both verbal and visual data for scholars interested in
+studying online activity. And although the sheer volume of available resources on the Web has presented the challenge of choosing what to study
+and how to study, the Web has proven even more daunting. In this chapter,
+we will provide an overview of methodological approaches researchers
+have used to study the Web.
+The goal in doing so is not to provide an exhaustive categorization of
+methodologies. Instead, it is our hope that by understanding the methods
+used for studying the Web and studying Web use, those who seek to archive and preserve the Web can better understand the needs of the research
+community.
+The Web consists of an immense variety of types of materials whose variety is best understood along two dimensions. First, the Web itself is a
+medium, and not simply content. More to the point, it is both a medium
+that conveys content via numerous protocols (such as HTTP), and it is also
+a “container” for content, one which further “shapes” content and also presents it to viewers. However, the presentation of content is at the viewer’s
+discretion and is further shaped by the viewing tools used (browsers and
+other applications). In other words, though the content may be the same
+Web page, two viewers using different browsers or using different browser
+settings may ultimately see different pages. Second, and further unlike the
+
+56
+
+Steve Jones and Camille Johnson
+
+world of analog materials, the very definition of media for storing the Web
+is open to question. Websites can be locally stored or cached, may be mirrored, may be dynamic, or may be virtually ephemeral, as is the case with
+Web cams.
+Internet research, in general, and Web research, in particular, is populated by a diverse group of scholars. Their various disciplines include linguistics, journalism, political science, business administration, geography,
+advertising, communication, and the arts, to name only a few. Because we
+are dealing with such a wide array of academic traditions, the types of materials with which they work are very diverse, and the working definitions
+of research methods vary as well. What counts as “ethnographic” analysis
+of Web texts for a marketing scholar may be interpreted as a qualitative
+content analysis by a communication scholar. Therefore, another goal of
+this chapter is not to provide rigid Web content categories or blueprints for
+each methodological approach as they apply to Web studies, but rather to
+present a range of interpretations and applications of these methods as they
+have proven most useful to researchers of the Web.
+
+2.2 Content Analysis
+Content analysis is one of the more common methods for studying the
+Web. As with other media, a researcher who uses content analysis codes
+Web content, either written text or images, based on particular criteria and
+places them within relevant categories or themes; in other words, it is a
+survey of Web content, rather than Web users. Within Web studies, content analysis has primarily been used as a comparative tool, allowing the
+researcher to make meaningful comparisons of content between similar
+Web texts. A study of antiglobalization organizations’ websites used content analysis to determine whether cohesion in message and purpose existed among the sites (Van Aelst and Walgrave 2002). Content was coded
+and sorted based on what appeared to be its primary function within four
+areas: to provide information about the organization, to provide information about antiglobalization issues, to foster interactivity with the group
+organizers and other members, and to foster mobilization on behalf of the
+cause, such as donating money signing an online petition. Through their
+analysis, Van Aelst and Walgrave were able to conclude that indeed, antiglobalizations organizations online were generally using their websites in
+similar ways to inform and involve their memberships.
+Another comparative study analyzed the content of radio station websites to determine how the commercial radio industry was responding to
+
+2 Web Use and Web Studies
+
+57
+
+the availability of the World Wide Web for promoting their stations. This
+assessment was made by analyzing the types of user-based information being provided on radio stations’ websites (e.g., traffic maps and program
+logs), their use of websites as tools for promoting their station (e.g., contest information and DJ bios), and their incorporation of interactive features (e.g., e-mail addresses for the stations’ staff members and listener
+surveys) (Pitts and Harms 2003). For radio stations, this Web study provided a valuable resource for evaluating their current and potential uses of
+the Web.
+Content analysis has also been used to study the impact of institutional
+policy changes on related websites. Educational policies, for example,
+have placed increasing importance on the incorporation of information and
+communications technology (ICT) into secondary schools’ institutional
+missions. One study chose to evaluate the progress being made toward
+achieving this goal as outlined by the National Grid for Learning in the UK
+through a content analysis of 150 secondary school websites (Hesketh and
+Selwyn 1999). Images and written texts were coded, identifying the websites within one of the following attitude categories: Proactive, pupilcentered, or reactive. Through these categories and an analysis of the
+schools’ profiles, the researchers recognized a correlation between a commitment to ICT integration and institutional capital; the more economic
+and social capital a school had, the more likely that their website’s content
+would reflect a positive, proactive attitude toward the incorporation of ICT
+in their mission.
+The US Federal Trade Commission has employed content analysis to
+evaluate the implementation of online privacy and information security notices on commercial websites (Milne and Culnan 2002). Their study comprised a longitudinal analysis of four Web “surveys” spanning from 1998
+to 2001. Criteria such as the inclusion or exclusion of notices regarding the
+disclosure of visitor information with third parties and use of “cookies,”
+collection of user information beyond e-mail addresses, and the use of information security on the sites were used to determine whether the websites met the requirements of fair information practices. The results from
+the 2001 analysis were also compared with previous years and indicated that
+among commercial websites that collect personal information from their users there has been an increase in the implementation of fair information
+practices (p. 355).
+
+
