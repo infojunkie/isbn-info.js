@@ -21,6 +21,10 @@ describe('isbn-detect', function() {
         text: fs.readFileSync('./test/data/test4.txt', 'utf-8'),
         isbns: ['3540233385', '9783540233381']
       },
+      {
+        text: fs.readFileSync('./test/data/test5.txt', 'utf-8'),
+        isbns: ['9780198836421', '9780192573513']
+      },
     ]) {
       assert.deepStrictEqual(isbnDetect(test.text, {
         flags: {

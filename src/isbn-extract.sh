@@ -5,7 +5,7 @@ usage() {
   echo "Usage: $(basename $BASH_SOURCE) [-p <pages>] [-h] [-a] [-t isbn,issn] /path/to/ebook" 1>&2; exit 1;
 }
 
-pages=10
+pages=30
 type=isbn
 all=false
 while getopts ap:ht: option; do
