@@ -39,7 +39,7 @@ case "$file" in
     $(pdftotext -f 1 -l "$pages" "$file" "$tmp_file" &>/dev/null)
     ;;
   *.djvu)
-    $(djvutxt -page=1-$pages "$file" > "$tmp_file" &>/dev/null)
+    $(djvutxt -page=1-$pages "$file" > "$tmp_file" 2>/dev/null)
     ;;
   *)
     echo "Unhandled file type $file" 1>&2
