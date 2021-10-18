@@ -1,0 +1,1537 @@
+Curtis Roads
+
+L’audionumérique
+Musique et informatique
+3 e édition
+
+Traduction et adaptation française : Jean de Reydellet
+
+Cet ouvrage est la 3e édition,
+mise à jour et enrichie, de la traduction française
+de l’ouvrage de Curtis Roads publié en langue anglaise sous le titre :
+The Computer Music Tutorial
+Copyright 1ère édition © 1996 Massachusetts Institute of Technology
+Authorized translation from the English Language edition published by MIT Press
+All rights reserved.
+© Dunod, 2016 pour la 3e édition française
+
+Traduction et adaptation française : Jean de Reydellet
+
+Photo de couverture : B&W Loudspeakers LTD, England
+
+© Dunod, 1998, 2007, 2016 pour la traduction française
+5 rue Laromiguière, 75005 Paris
+www.dunod.com
+
+ISBN 972-2-10-074650-7
+
+Table des matières
+AVANT-PROPOS
+AVANT-PROPOS
+
+DE L’AUTEUR
+
+DU TRADUCTEUR
+
+PARTIE A – ENVIRONNEMENT
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+CHAPITRE 1 – CONCEPTS
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+1.10
+
+XIII
+
+ET OUTILS
+
+AUDIONUMÉRIQUES
+
+Origines : histoire de l’enregistrement audionumérique
+Éléments fondamentaux des signaux sonores
+Représentations analogiques du son
+Représentations numériques du son
+Gamme dynamique des systèmes audionumériques
+Suréchantillonnage
+Supports audionumériques
+Compression des données audio
+Synthèse et traitement du signal
+Conclusion
+
+CHAPITRE 2 – MIXAGE
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+2.9
+
+XI
+
+Mixage et gamme dynamique
+Tables de mixage
+Tables hybrides
+Éléments des tables de mixage numériques
+Enregistrement et mixage multipiste
+Écoute audio
+Automatisation du mixage
+Synchronisation du mixage audio et de la vidéo
+Conclusion
+
+3
+3
+10
+16
+17
+31
+33
+36
+37
+39
+41
+43
+45
+45
+50
+52
+54
+56
+59
+61
+65
+
+IV
+
+L’AUDIONUMÉRIQUE
+
+CHAPITRE 3 – TRANSFORMATION
+3.1
+3.2
+3.3
+3.4
+3.5
+3.6
+3.7
+
+Remodeleurs d’enveloppes
+Extensions avec seuil (noise gates)
+Compresseurs
+Extenseurs
+Limiteurs
+Unités de réduction du bruit et compresseurs-extenseurs
+Dangers de la transformation de la gamme dynamique
+
+CHAPITRE 4 – LES
+4.1
+4.2
+4.3
+4.4
+4.5
+4.6
+4.7
+4.8
+4.9
+4.10
+4.11
+4.12
+4.13
+4.14
+
+FILTRES NUMÉRIQUES
+
+Présentation de la théorie des filtres aux musiciens
+Filtres : origines
+Réponse impulsionnelle, fréquentielle et de phase d’un filtre
+Les filtres sous forme d’équations
+Filtre passe-bas simple
+Filtre passe-haut simple
+Filtres à réponse impulsionnelle finie généraux
+Filtres à réponse impulsionnelle infinie simples
+Filtres à réponse impulsionnelle infinie généraux
+Comparaison des filtres FIR et des filtres IIR
+Conception d’un filtre à partir d’une spécification arbitraire
+Blocs de construction des filtres complexes
+Filtres en peigne
+Filtres passe-tout
+
+CHAPITRE 5 – LA
+5.1
+5.2
+5.3
+5.4
+5.5
+5.6
+5.7
+5.8
+5.9
+5.10
+5.11
+
+CONVOLUTION
+
+L’opération de convolution
+Convolution par impulsions élémentaires échelonnées et retardées
+Définition mathématique de la convolution
+Comparaison de la convolution et de la multiplication
+La loi de la convolution
+Relation entre convolution et filtrage
+Convolution rapide
+Signification musicale de la convolution
+Convolution avec des grains et des pulsars
+Comparaison de la convolution linéaire et de la convolution circulaire
+Déconvolution
+
+CHAPITRE 6 – LES
+6.1
+6.2
+6.3
+
+DE LA GAMME DYNAMIQUE
+
+EFFETS DE RETARD
+
+Les effets de retard temporel fixe
+Les effets de retard temporel variable
+Changement temps/hauteur
+
+67
+67
+67
+69
+71
+71
+71
+73
+75
+75
+76
+78
+79
+80
+82
+83
+85
+87
+87
+87
+88
+89
+93
+95
+95
+97
+98
+99
+99
+99
+100
+101
+104
+105
+105
+107
+107
+111
+114
+
+TABLE
+
+V
+
+DES MATIÈRES
+
+CHAPITRE 7 – LA
+7.1
+7.2
+7.3
+7.4
+
+121
+126
+137
+139
+RÉVERBÉRATION
+
+151
+161
+DE LA HAUTEUR
+
+Analyse de hauteur, de rythme et de forme d’onde : origines
+Reconnaissance de la hauteur et du rythme dans les systèmes MIDI
+Le problème de la détection de hauteur
+Méthodes de détection de hauteur
+
+CHAPITRE 10 – RECONNAISSANCE
+10.1
+10.2
+10.3
+10.4
+10.5
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+DU RYTHME
+
+Applications de reconnaissance du rythme
+Niveaux de reconnaissance du rythme
+Détection d’événement
+Transcription
+Récupération
+
+CHAPITRE 11 – ANALYSE
+11.1
+11.2
+11.3
+11.4
+11.5
+11.6
+11.7
+11.8
+
+151
+
+Réverbération
+Modelage d’espaces sonores
+
+CHAPITRE 9 – RECONNAISSANCE
+9.1
+9.2
+9.3
+9.4
+
+121
+
+Spatialisation du son
+Indications de localisation
+Haut-parleurs rotatifs
+Son surround
+
+CHAPITRE 8 – LA
+8.1
+8.2
+
+SPATIALISATION
+
+SPECTRALE
+
+:
+
+MÉTHODES DE
+
+Applications de l’analyse spectrale
+Tracés spectraux
+Modèles derrière les méthodes d’analyses spectrales
+Spectre et timbre
+Analyse spectrale : origines
+Le spectre de Fourier à court terme
+La représentation sonagramme
+Le vocodeur de phase
+
+CHAPITRE 12 – ANALYSE SPECTRALE :
+
+169
+169
+172
+173
+176
+187
+188
+188
+189
+191
+195
+
+FOURIER
+
+197
+198
+198
+200
+203
+204
+208
+220
+222
+233
+
+MÉTHODES PAR DÉCOMPOSITION ATOMIQUE
+
+12.1
+12.2
+12.3
+12.4
+
+Fondamentaux
+Méthodes
+Applications
+Conclusion : études avancées
+
+233
+236
+238
+242
+
+VI
+
+L’AUDIONUMÉRIQUE
+
+CHAPITRE 13 – ANALYSE
+13.1
+13.2
+13.3
+13.4
+13.5
+13.6
+13.7
+13.8
+
+SPECTRALE
+
+:
+
+AUTRES MÉTHODES
+
+Analyse du son sans la méthode de Fourier
+Analyse par banque de filtres à Q constant
+Analyse par ondelettes
+Analyse du signal par distribution de Wigner-Ville
+Analyse spectrale par autorégression
+Analyse par d’autres fonctions
+Modèles d’audition
+Systèmes comprenant le signal
+
+CHAPITRE 14 – MIDI
+14.1
+14.2
+14.3
+14.4
+14.5
+14.6
+14.7
+14.8
+14.9
+14.10
+14.11
+14.12
+14.13
+14.14
+14.15
+14.16
+14.17
+14.18
+14.19
+
+15.1
+15.2
+15.3
+15.4
+15.5
+15.6
+15.7
+15.8
+15.9
+15.10
+15.11
+15.12
+
+243
+245
+248
+255
+257
+259
+260
+262
+269
+
+Comparaison des données de contrôle MIDI et du son
+Origines : la spécification MIDI 1.0
+Possibilités musicales du MIDI
+Matériel MIDI
+Pilotes MIDI
+Canaux MIDI
+Messages MIDI
+Modes MIDI
+Contrôle continu par MIDI
+Fichiers MIDI standards
+Transfert de données audio
+Contrôle temporel du MIDI
+Contrôle de machine MIDI et contrôle de show MIDI
+Accessoires MIDI
+Limites du MIDI
+Accélérer les communications MIDI
+Écriture de logiciel de musique MIDI
+Contacts sur le MIDI
+Conclusion
+
+CHAPITRE 15 – INTERCONNEXIONS
+
+243
+
+DE SYSTÈME
+
+Alimentations en courant alternatif
+Câbles audio analogiques
+Patchbays
+Lignes série électroniques
+Câbles MIDI
+Liaisons audionumériques
+Câbles en fibre optique
+Liaisons de synchro
+Ports et bus parallèles
+Contrôleurs d’accès direct à la mémoire et mémoires partagées
+Réseaux
+Conclusion
+
+270
+270
+272
+273
+278
+278
+280
+286
+289
+290
+292
+293
+295
+296
+297
+300
+302
+304
+304
+307
+307
+309
+310
+312
+313
+315
+318
+320
+323
+324
+325
+331
+
+TABLE
+
+VII
+
+DES MATIÈRES
+
+CHAPITRE 16 – LA
+16.1
+16.2
+16.3
+16.4
+16.5
+16.6
+16.7
+16.8
+16.9
+
+PSYCHOACOUSTIQUE ET LA SYNTHÈSE
+
+Perception de l’intensité
+L’oreille humaine
+Perception des caractéristiques temporelles
+Perception de la fréquence
+Perception du bruit
+Fusion et perception du timbre
+Effets de masques
+Conclusion : psychoacoustique et perception
+Remerciements
+
+PARTIE B – SYNTHÈSE
+CHAPITRE 17 – INTRODUCTION
+17.1
+17.2
+17.3
+17.4
+17.5
+17.6
+17.7
+17.8
+17.9
+
+À LA SYNTHÈSE
+
+Origines : histoire de la synthèse numérique du son
+Synthèse par lecture de table d’onde fixe
+Bruit de lecture de table et oscillateurs interpolants
+Synthèse de formes d’ondes variant dans le temps
+Logiciels de synthèse
+Synthèse numérique en temps réel
+Comparaison de la synthèse différée et de la synthèse en temps réel
+Spécification des sons musicaux
+Conclusion
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Musique Concrète et échantillonnage : origines
+Bouclage
+Transposition de hauteur
+Conversion du taux d’échantillonnage sans transposition de hauteur
+Problèmes du rééchantillonnage
+Réduction et compression des données dans les échantillonneurs
+Bibliothèques d’échantillons
+Évaluation des échantillonneurs
+Modelage des transitions note à note
+
+CHAPITRE 19 – LA
+19.1
+19.2
+
+Synthèse additive
+Analyse/resynthèse additive
+
+334
+336
+337
+339
+341
+342
+343
+345
+345
+
+SONORE
+
+CHAPITRE 18 – L’ÉCHANTILLONNAGE
+18.1
+18.2
+18.3
+18.4
+18.5
+18.6
+18.7
+18.8
+18.9
+
+333
+
+SYNTHÈSE ADDITIVE
+
+349
+349
+352
+354
+356
+360
+362
+364
+364
+371
+373
+373
+377
+379
+381
+382
+382
+384
+384
+385
+389
+389
+398
+
+VIII
+
+L’AUDIONUMÉRIQUE
+
+CHAPITRE 20 – LA
+20.1
+20.2
+
+SYNTHÈSE PAR TABLES D’ONDES MULTIPLES
+
+Fondu enchaîné de tables d’ondes
+Empilement d’ondes
+
+CHAPITRE 21 – LA
+21.1
+21.2
+21.3
+21.4
+
+SYNTHÈSE PAR TERRAINS D’ONDES
+
+Terrains et orbites
+Création de formes d’ondes prévisibles à partir des terrains d’ondes
+Orbites périodiques
+Orbites variant dans le temps
+
+CHAPITRE 22 – LA
+22.1
+22.2
+22.3
+22.4
+22.5
+
+23.1
+23.2
+23.3
+23.4
+23.5
+23.6
+23.7
+
+25.1
+25.2
+25.3
+25.4
+25.5
+25.6
+25.7
+25.8
+25.9
+
+409
+412
+415
+415
+416
+417
+418
+421
+
+Synthèse granulaire : historique
+Grains sonores
+Instrument générateur de grain
+Organisations granulaires de haut niveau
+Évaluation de la synthèse granulaire
+
+421
+422
+424
+424
+435
+
+CHAPITRE 23 – LA
+
+437
+
+SYNTHÈSE PULSAR
+
+Synthèse pulsar de base
+Spectres de la synthèse pulsar de base
+Synthèse pulsar avancée
+Implémentations de la synthèse pulsar
+Composer avec les pulsars
+Applications musicales de la synthèse pulsar
+Conclusion
+
+CHAPITRE 24 – LA
+24.1
+24.2
+24.3
+
+SYNTHÈSE GRANULAIRE
+
+409
+
+SYNTHÈSE SOUSTRACTIVE
+
+438
+443
+445
+450
+451
+452
+452
+455
+
+Synthèse soustractive
+Analyse/resynthèse soustractive
+Codage prédictif linéaire
+
+455
+466
+468
+
+CHAPITRE 25 – LA
+
+479
+
+SYNTHÈSE PAR MODULATION
+
+Signaux bipolaires et unipolaires
+Modulation en anneau
+Modulation d’amplitude
+Modulation de fréquence
+Modulation de fréquence à multiples porteuses
+Modulation de fréquence à multiples modulantes
+Modulation de fréquence bouclée
+Distorsion de phase
+Synthèse par distorsion non linéaire
+
+480
+481
+485
+488
+497
+499
+502
+509
+509
+
+TABLE
+
+IX
+
+DES MATIÈRES
+
+25.10 Modulations générales
+25.11 Conclusion
+
+CHAPITRE 26 – LA
+26.1
+26.2
+26.3
+
+SYNTHÈSE PAR MODÈLES PHYSIQUES
+
+Synthèse par modèles physiques
+Analyse de source et de paramètres pour les modèles physiques
+Synthèse Karplus-Strong (corde pincée et tambour)
+
+CHAPITRE 27 – LA
+27.1
+27.2
+27.3
+27.4
+27.5
+27.6
+
+517
+518
+
+SYNTHÈSE ANALOGIQUE VIRTUELLE
+
+Comparaison de numérique et d’analogique
+Analogique virtuelle
+Évolution de la synthèse analogique
+Questions soulevées par l’émulation de synthèse analogique
+Amplificateurs, compresseurs et égaliseurs par modelage analogique
+Conclusion
+
+CHAPITRE 28 – LA
+28.1
+28.2
+28.3
+28.4
+
+Synthèse par fonction d’onde formantique et CHANT
+Analyse/resynthèse FOF
+VOSIM
+Synthèse par fonction de fenêtrage
+
+CHAPITRE 29 – LA
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+29.1
+29.2
+29.3
+29.4
+
+SYNTHÈSE PAR SEGMENTS DE FORME D’ONDE
+
+Interpolation de forme d’onde
+SAWDUST
+SSP
+Synthèse par instruction
+
+CHAPITRE 30 – LA
+30.1
+30.2
+30.3
+30.4
+
+SYNTHÈSE FORMANTIQUE
+
+31.1
+31.2
+31.3
+31.4
+
+519
+537
+539
+545
+545
+546
+548
+550
+556
+557
+559
+561
+568
+570
+572
+577
+578
+582
+583
+584
+
+SYNTHÈSE CONCATÉNATIVE
+
+Fondamentaux
+Deux approches générales
+Perspectives historiques
+Conclusion
+
+CHAPITRE 31 – LA
+
+519
+
+587
+588
+591
+593
+593
+
+SYNTHÈSE GRAPHIQUE
+
+Graphiques dans la synthèse sonore : origines
+Interaction avec l’UPIC
+Synthèse graphique avec le MIDI
+Évaluation de la synthèse sonore graphique
+
+595
+595
+596
+599
+599
+
+X
+
+L’AUDIONUMÉRIQUE
+
+CHAPITRE 32 – LA
+32.1
+32.2
+
+SYNTHÈSE STOCHASTIQUE ET CHAOTIQUE
+
+Modulation de bruit
+Synthèse stochastique de forme d’onde
+
+BIBLIOGRAPHIE
+INDEX
+INDEX
+
+601
+601
+605
+611
+
+DES SUJETS
+
+655
+
+DES NOMS
+
+672
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Avant-propos de l’auteur
+
+Après des décennies de recherche musicale, les conditions d’un âge d’or de création dans la musique électronique et informatique ont émergé. Un certain nombre de facteurs cruciaux, à la fois
+techniques et esthétiques, se mettent en place pour favoriser cette tendance.
+La musique informatique est le sujet d’un nombre de publications plus élevé qu’à aucun autre
+moment dans le passé. La recherche est florissante, et des douzaines de festivals servent de terrain
+d’expérimentation pour la musique électronique. Une industrie variée est apparue autour de la
+création de nouveaux synthétiseurs, logiciels et composants audio. La mentalité purement
+commerciale est contrebalancée par un vigoureux marché alternatif d’instruments exotiques et de
+logiciels gratuits. Les outils d’organisation du son — les appareils d’édition et de mixage — ont
+atteint un degré d’efficacité indéniable, tandis que leur prix a chuté. Le coût d’un studio à base
+d’informatique — inimaginable pour un musicien individuel il y a encore vingt ans — est souvent
+inférieur au prix d’un instrument traditionnel.
+Les avancées dans les domaines de la recherche et de la technologie ne relatent cependant qu’une
+partie de l’histoire. Nous possédons maintenant une meilleure compréhension des implications
+esthétiques de cette approche de la musique. Nous voyons qu’elle se déploie sur de multiples échelles temporelles, et nos méthodes de synthèse, d’analyse et de transformation du son reflètent cela.
+La perspective des échelles multiples a commencé avec l’exploration du microson et de ses effets,
+depuis les procédés granulaires jusqu’aux masses sonores en mutations continues. Couplée à cet
+aperçu, la spatialisation du son a évolué pour devenir un élément à part entière de la composition.
+Ces perspectives ont eu un impact profond sur notre conception de la forme musicale.
+Les nouveaux outils et matériaux sonores conduisent inévitablement à de nouvelles stratégies
+d’organisation. Parmi celles-ci se trouvent des processus basés sur les mutations sonores, le
+contrepoint timbral et spatial, le contrôle détaillé de masses sonores complexes, les juxtapositions
+de paysages sonores virtuels et réels, la coalescence et la désintégration sonore, le contrepoint
+microtonal, et l’interaction entre l’échelle microtemporelle et les autres échelles de temps qui ne
+peut être réalisée par des instruments acoustiques.
+C’est pour moi un grand plaisir que de pouvoir présenter cette troisième édition française de
+L’audionumérique. J’ai la chance d’avoir comme collaborateur Jean de Reydellet, qui aura été la
+
+XII
+
+L’AUDIONUMÉRIQUE
+
+force motrice de cette publication. J’ai également la chance d’avoir trouvé en Dunod un éditeur
+visionnaire, qui aura su prévoir le besoin d’une édition révisée et actualisée de ce livre. Je suis
+heureux d’annoncer qu’avec cette nouvelle édition, le lecteur francophone possède la version la
+plus récente et la plus à jour de toutes celles qui existent, y compris en langue anglaise.
+Curtis Roads
+Santa Barbara, novembre 2015
+
+Présentation des collaborateurs
+Curtis Roads
+Curtis Roads est compositeur et professeur au Media Arts and Technology, University of California,
+Santa Barbara.
+Jean de Reydellet (chapitre 7)
+Titulaire d’une maîtrise en musicologie, Jean de Reydellet s’est spécialisé dans les technologies
+informatiques et matérielles appliquées à la musique.
+John Strawn (chapitre 1 et chapitre 17)
+Titulaire d’un doctorat de Standford, John Strawn est le fondateur de S Systems, Inc, société fournissant des services de conseil et d’expertise en programmation pour de nombreux acteurs de
+l’industrie audio.
+Bob L. Sturm (chapitre 12 et chapitre 30)
+Après avoir obtenu un doctorat à l’University of California, Santa Barbara, Bob L. Sturm travaille à
+Paris puis Copenhague. Il est maintenant maître de conférences en médias numériques à la School
+of Electronic Engineering and Computer Science, au sein de la Queen Mary University de Londres.
+John William Gordon (chapitre 16)
+John William Gordon a obtenu le premier doctorat en informatique musicale au monde, au sein du
+CCRMA de la Stanford University. Au cours de sa carrière, il a conçu des logiciels liés à l’acoustique, des solutions de traitement du signal et des systèmes de surveillance.
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Avant-propos du traducteur
+
+L’audionumérique, version française de l’ouvrage The Computer Music Tutorial de Curtis Roads,
+voit aujourd’hui le jour dans sa troisième édition. Dix-sept années se sont écoulées depuis la sortie
+de la première édition, qui constituait déjà une somme de connaissances remarquable dans les
+domaines de l’informatique musicale et de la synthèse du son. La seconde édition, conçue dès
+l’origine pour augmenter le nombre des informations fournies au lecteur, et divisée en deux parties, avait permis l’ajout de nombreux chapitres ou parties : MIDI, interconnexion de systèmes,
+supports audionumériques, compression des données audio, formats de son surround, protocoles
+réseau, synthèse pulsar et synthèse par émulation analogique.
+Cette troisième édition intègre quant à elle deux nouveaux chapitres. Les méthodes par décomposition atomique permettent l’émergence de techniques à fort potentiel pour des applications de
+traitement avancé de l’audio : débruitage, désaturation, correction de corruptions dans les
+signaux, ou encore séparation de sources ou détection de notes dans des environnements complexes. La synthèse concaténative quant à elle, constitue la méthode la plus aboutie de synthèse texteparole actuellement existante. Elle est également utilisée dans les domaines de la synthèse vocale
+et de la synthèse d’instruments en intégrant des données de haut niveau telles que phrasés, transitions entre les notes ou nuances de jeu. Le livre a enfin fait l’objet d’une relecture qui a permis la
+correction d’un certain nombre d’erreurs et la suppression de quelques rares parties devenues
+obsolètes.
+Je tiens tout d’abord à remercier Curtis Roads d’être parvenu au cours des années à réunir cet
+ensemble de connaissances et d’informations sur de nombreux sujets liés au travail sur le son, et
+d’avoir su les exprimer dans un style concis et clair. Il m’a fait l’honneur de m’accorder sa confiance
+lors de la réalisation de cette version en langue française, et parce qu’il est un homme épris de
+savoir, de recherche et de vérité, je ne peux éprouver à son égard qu’un sentiment de profond respect. J’exprime également ma gratitude à Horacio Vaggione, pour avoir assuré des cours passionnants, et pour sa capacité à placer constamment des concepts liés à la composition musicale au
+sein d’un ensemble plus grand d’idées esthétiques et philosophiques. À lui, ainsi qu’à Gérard Pape,
+ancien directeur du CCMIX (Centre de Composition Musicale Iannis Xenakis), j’adresse de chaleureux remerciements pour avoir permis à Curtis Roads d’assurer des cours sur le sol français dans
+
+XIV
+
+L’AUDIONUMÉRIQUE
+
+le cadre de l’université Paris 8 et du CCMIX, symbole de leur ardente passion à rendre accessibles
+nombre de sujets abordés dans ce livre sur un plan pratique, par l’utilisation du studio et de la
+composition musicale.
+J’adresse ma reconnaissance à Jean-Baptiste Gugès et Cécile Rastier des Éditions Dunod. Leur professionnalisme, leur sensibilité, leur gentillesse et leur intelligence auront permis d’éditer un
+ouvrage d’un haut niveau de qualité, tant sur le fond que sur la forme. J’espère que chaque lecteur
+passionné par le son et la musique trouvera parmi ces pages matière à alimenter ses réflexions et
+son inspiration.
+Jean de Reydellet
+Novembre 2015
+
+Partie A
+Environnement
+et outils
+
+Chapitre 1
+Concepts audionumériques
+Curtis Roads et John Strawn
+
+La fusion de l’enregistrement audionumérique et de la technologie de l’informatique musicale crée
+un médium artistique souple et puissant. Ce chapitre présente l’histoire et la technologie de l’enregistrement et de la reproduction audionumérique. Après avoir étudié cette introduction, vous devriez
+être accoutumé au vocabulaire de base et aux concepts de l’audionumérique. Par souci de brièveté,
+nous condenserons les grands sujets ; pour plus d’informations, se reporter à D. Davis (1988, 1992).
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+1.1
+
+Origines : histoire de l’enregistrement audionumérique
+
+Figure 1.1 – Séance d’enregistrement par procédé mécanique avant 1900.
+Les vibrations sonores captées par le large cône situé au-dessus du piano étaient transformées sous
+forme de vibrations mécaniques d’un stylet qui perçait un cylindre de cire en rotation.
+
+4
+
+ENVIRONNEMENT
+
+Figure 1.2 – Haut-parleur Amplion, publicité de 1925.
+
+ET OUTILS
+
+CHAPITRE 1 – CONCEPTS
+
+AUDIONUMÉRIQUES
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+L’histoire de l’enregistrement sonore est riche et commence avec les expérimentations de Thomas
+Edison et d’Émile Berliner dans les années 1870, puis fut marquée par le Telegraphone de Valdemar
+Poulsen, un enregistreur magnétique à fil métallique datant de 1898 (Read et Welch, 1976). L’enregistrement sonore des débuts était mécanique (figure 1.1).
+Bien que l’invention de la lampe à triode en 1906 lançât l’ère de l’électronique, les enregistrements
+produits électroniquement ne furent pas mis en application avant 1924 (Keller, 1981). La figure 1.2
+montre un haut-parleur à pavillon typique des années 1920.
+
+Figure 1.3 – Prototype d’un enregistreur à bande portable Magnetophon de 1935,
+construit par AEG (avec l’aimable autorisation de BASF Aktiengesellschaft).
+
+L’enregistrement optique sur film fut présenté pour la première fois en 1922 (Ristow, 1993). L’enregistrement sur bande recouverte de matériau magnétique pulvérisé fut développé en Allemagne
+dans les années 1930 (figure 1.3), mais ne s’étendit au reste du monde qu’après la Seconde Guerre
+mondiale. Les enregistreurs allemands Magnetophon étaient largement en avance sur les enregistreurs à fil métallique ou à ruban d’acier, qui nécessitaient une soudure pour faire un raccord. Les
+Magnetophon et leurs descendants étaient des enregistreurs analogiques. Le terme « analogique »
+fait référence à la forme d’onde codée sur la bande : une proche analogie de la forme d’onde sonore
+captée par le microphone. L’enregistrement analogique continue d’être amélioré, mais doit faire face
+
+5
+
+6
+
+ENVIRONNEMENT
+
+ET OUTILS
+
+à des limites physiques fondamentales. Ces limites sont plus apparentes lors de copies d’un support
+analogique à un autre : un bruit additionnel est inévitable.
+Pour plus d’informations sur l’enregistrement analogique, en particulier sur les machines multipistes, voir le chapitre 2.
+
+1.1.1 Expérimentation de l’enregistrement numérique
+Le concept clé de l’enregistrement audionumérique est l’échantillonnage, c’est-à-dire la conversion
+de signaux analogiques continus (tels que ceux provenant d’un microphone) en signaux discrets
+échantillonnés temporellement. La clé de voûte théorique de l’échantillonnage est le théorème de
+l’échantillonnage, qui spécifie la relation entre le taux d’échantillonnage et la largeur de bande
+audio (voir la partie sur le théorème de l’échantillonnage plus loin dans ce chapitre). Ce théorème
+est également appelé théorème de Nyquist d’après les travaux de Harold Nyquist aux Bell Telephone
+Laboratories (Nyquist, 1928), mais une autre forme de ce théorème fut tout d’abord établie en 1841
+par le mathématicien français Augustin Louis Cauchy (1789-1857). Le chercheur britannique Alec
+Reeves développa le premier système breveté de modulation par impulsion (PCM) pour la transmission de messages sous forme (numérique) de « dichotomie de l’amplitude, quantification du
+temps » (Reeves, 1938 ; Licklider, 1950 ; Black, 1953). Même aujourd’hui, l’enregistrement numérique
+est quelquefois appelé « enregistrement PCM ». Le développement de la théorie de l’information
+contribua à la compréhension de la transmission audionumérique (Shannon, 1948). La résolution
+des difficiles problèmes de conversion entre signaux analogiques et signaux numériques demanda
+deux décennies, et est encore en cours d’amélioration. Nous présenterons les procédés de conversion
+plus tard.
+À la fin des années 1950, Max Mathews et son groupe de travail des Bell Telephone Laboratories générèrent les premiers sons synthétiques à partir d’un ordinateur. Les échantillons étaient écrits par
+l’ordinateur sur des armoires de stockage à bandes magnétiques volumineuses et coûteuses. La
+production de son à partir des nombres était effectuée de façon séparée en relisant la bande à travers
+une lampe « faite maison » de 12 bits, un « convertisseur numérique son » développé par Epsco
+Corporation (Roads, 1980 ; voir également le chapitre 17).
+Hamming, Huffman et Gilbert sont à l’origine de la théorie de la correction d’erreur numérique datant
+des années 1950 et 1960. Plus tard, Sato, Blesser, Stockham et Doi contribuèrent à la correction
+d’erreur, ce qui permit la construction des premiers systèmes d’enregistrement audionumérique utilisables. Le premier enregistreur audionumérique monophonique spécialisé (basé sur un mécanisme de magnétoscope), fut présenté par la compagnie japonaise de diffusion NHK (Nakajima et
+coll. 1983). Peu après, Denon développa une version améliorée (figure 1.4), et la course commença
+pour la mise sur le marché d’enregistreurs audionumériques (Iwamura et coll., 1973).
+En 1977, le premier système d’enregistrement arriva sur le marché, le processeur Sony PCM-1,
+conçu pour coder des signaux audionumériques 13 bits sur des enregistreurs de vidéocassettes
+Sony de format Beta. En moins d’une année, il fut remplacé par les codeurs PCM en 16 bits tels que
+le Sony PCM-1600 (Nakajima et coll. ,1978). À ce moment, la production se divisa en deux secteurs :
+des unités professionnelles et des unités « grand public », bien qu’un réel marché de masse pour ce
+type d’enregistreurs numériques ne se soit jamais matérialisé. Les Sony PCM-1610 et 1630 professionnels devinrent les normes pour le mastering des disques compacts (CD), tandis que les systèmes
+compatibles avec le Sony PCM-F1 (également appelés systèmes EIAJ pour Electronics Industry
+Association of Japan — Association de l’Industrie Électronique du Japon) devinrent de facto la
+norme pour l’enregistrement audionumérique à bas prix sur vidéocassette. Ces normes ont perduré
+durant les années 1980.
+
+CHAPITRE 1 – CONCEPTS
+
+AUDIONUMÉRIQUES
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Figure 1.4 – Enregistreur audionumérique construit en 1973 par Nippon Columbia (Denon)
+et basé sur un enregistreur à bande vidéo 1 pouce (sur la droite).
+
+L’Audio Engineering Society établit deux normes de fréquences d’échantillonnage en 1985 : 44,1 et
+48 kHz. Ils révisèrent leurs spécifications en 1992 (Audio Engineering Society, 1992a, 1992b). Il
+existe également une fréquence d’échantillonnage de 32 kHz pour la radiodiffusion. Entre-temps,
+quelques compagnies développèrent des enregistreurs numériques de plus haute résolution capable
+de coder plus de seize bits à des taux d’échantillonnage plus élevés. Par exemple, une version de l’enregistreur numérique à bande X-86 de Mitsubishi codait en 20 bits à une fréquence d’échantillonnage
+de 96 kHz (Mitsubishi, 1986). Un certain nombre d’enregistreurs à haute résolution sont maintenant
+sur le marché.
+
+1.1.2 Son numérique pour le public
+Le son numérique atteignit tout d’abord le grand public en 1982 grâce au format disque compact
+(CD), un disque optique de 12 cm lu par un laser (figure 1.5). Le format CD fut développé conjointement par les sociétés Philips et Sony après des années de recherche. Ce fut un succès commercial
+énorme, car plus de 1,35 million de lecteurs et des dizaines de millions de disques furent vendus
+en moins de deux ans (Pohlman, 1989). Depuis lors, une variété de produits a été dérivée de la technologie du CD, dont le CD-Rom (Read Only Memory — Mémoire à lecture seule), le CD-I (Interactif),
+et d’autres formats mélangeant les données audio, les textes et les images.
+Au début des années 1990, les constructeurs se recentrèrent sur un besoin de support numérique
+enregistrable. Différents supports apparurent, dont la DAT (Digital Audio Tape — Bande audionumérique), la DCC (Digital Compact Cassette — Cassette compacte numérique), le MD (Mini-Disc),
+et le CD-R (CD enregistrable). Voir plus bas la partie sur les supports audionumériques.
+
+7
+
+8
+
+ENVIRONNEMENT
+
+ET OUTILS
+
+Figure 1.5 – Le disque compact Sony-Philips.
+
+1.1.3 Son numérique pour les musiciens
+Bien que les lecteurs de CD aient eu des convertisseurs 16 bits bon marché, les convertisseurs de
+bonne qualité n’étaient pas répandus avant 1988. Avant cette date, quelques centres de musique avaient
+développé des convertisseurs analogique-numérique et numérique-analogique, mais les possesseurs d’ordinateurs personnels devaient attendre. Ils pouvaient acheter des synthétiseurs numériques
+et les contrôler par protocole MIDI, mais ils ne pouvaient directement synthétiser ou enregistrer
+des sons avec l’ordinateur.
+Ce n’est qu’à la fin des années 1980 que des convertisseurs bon marché et de bonne qualité furent
+mis sur le marché pour les ordinateurs personnels. Ce développement proclama l’arrivée d’une
+nouvelle ère de la musique informatique. En peu de temps, la synthèse du son, l’enregistrement, et le
+traitement du son par ordinateur se répandirent. Des douzaines de stations de travail audio différentes apparurent sur le marché de la musique. Ces systèmes permettaient au musicien d’enregistrer
+
+CHAPITRE 1 – CONCEPTS
+
+AUDIONUMÉRIQUES
+
+de la musique sur un disque dur connecté à l’ordinateur. Cette musique pouvait être éditée précisément sur l’écran de l’ordinateur, avec relecture à partir du disque dur.
+
+1.1.4 Enregistrement numérique multipiste
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Contrairement aux enregistreurs stéréophoniques qui enregistrent en même temps les canaux
+gauche et droit, les enregistreurs multipistes possèdent différents canaux séparés ou pistes qui peuvent
+être enregistrées à différents moments. Chaque piste peut par exemple enregistrer un instrument
+séparé, ce qui permet une flexibilité lors du mixage ultérieur. Un autre avantage des machines multipistes est qu’elles laissent les musiciens construire les enregistrements par couches, chaque nouvelle
+couche étant un accompagnement des couches enregistrées précédemment.
+La British Broadcasting Company (BBC) développa un enregistreur numérique expérimental à dix
+canaux en 1976. Deux années plus tard, la société 3M, en association avec la BBC, présenta le premier enregistreur commercial 32 canaux (figure 1.6), accompagné d’un éditeur numérique de bande
+rudimentaire (Duffy, 1982). Le premier éditeur et mélangeur basé sur disque dur fut construit par
+la compagnie Soundstream de Salt Lake City, en Utah. Ce système permettait le mixage de huit pistes
+simultanées ou fichiers sons stockés sur disque dur (Ingebretsen et Stockham, 1984).
+
+Figure 1.6 – Enregistreur numérique 32 pistes à bande de 3M, présenté en 1978.
+
+Au milieu des années 1980, 3M et Soundstream s’étaient retirés du marché des enregistreurs numériques multipistes, dominé alors par les conglomérats Sony et Mitsubishi, plus tard rejoints par la
+compagnie Studer. Depuis un certain nombre d’années, l’enregistrement numérique multipiste
+était une activité très onéreuse (figure 1.7). La situation entra dans une nouvelle phase au début
+des années 1990, avec la présentation d’enregistreurs multipistes à bande peu onéreux, par les
+
+9
+
+10
+
+ENVIRONNEMENT
+
+ET OUTILS
+
+Figure 1.7 – Enregistreur multipiste numérique Studer D820-48 DASH,
+présenté en 1991 à un prix de vente au détail d’environ 200 000 €.
+
+compagnies Alesis et Tascam, et d’enregistreurs multipistes sur disque dur par diverses compagnies. Le chapitre 2 raconte l’histoire de l’enregistrement multipiste analogique.
+
+1.2
+
+Éléments fondamentaux des signaux sonores
+Cette partie présente les éléments fondamentaux et la terminologie pour décrire les signaux sonores,
+y compris la fréquence, l’amplitude et la phase.
+
+1.2.1 Fréquence et amplitude
+Le son atteint les oreilles de l’auditeur après avoir été transmis par l’air depuis sa source. Les auditeurs entendent des sons, car la pression de l’air change légèrement dans leurs oreilles. Si la pression
+varie selon un modèle répétitif, nous disons que le son a une forme d’onde périodique. S’il n’y a pas
+
+CHAPITRE 1 – CONCEPTS
+
+11
+
+AUDIONUMÉRIQUES
+
+de modèle discernable, on parle de bruit. Entre ces deux extrêmes se trouve le vaste domaine des
+sons quasi périodiques et quasi bruiteux.
+La répétition d’une forme d’onde périodique est appelée un cycle, et la fréquence fondamentale de
+la forme d’onde est le nombre de cycles qui se produit par seconde. Lorsque la longueur du cycle
+appelée longueur d’onde ou période augmente, la fréquence en cycles par seconde diminue, et vice
+versa. Dans le reste de ce livre, nous substituons Hz pour « cycles par seconde » en conformité avec
+la terminologie standard de l’acoustique (Hz est une abréviation de Hertz, d’après le nom de
+l’acousticien allemand Heinrich Hertz).
+
+✦
+
+Représentation dans le domaine temporel
+
++1
+
+Pression
+de l’air
+
+Amp. 0
+-1
+
+Temps
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Figure 1.8 – Représentation dans le domaine temporel d’un signal.
+L’axe vertical montre la pression de l’air. Lorsque la courbe est près du sommet du graphique, la
+pression de l’air est plus élevée. Au-dessous de la ligne horizontale, la pression est réduite. Les
+variations de pression atmosphérique entendues comme du son peuvent survenir rapidement ; pour
+des sons musicaux, ce graphique peut ne durer qu’un millième de seconde (1 ms).
+
+Une méthode simple pour décrire les formes d’ondes sonores est de les dessiner sous forme de graphiques de pression d’air par rapport au temps (figure 1.8). Ceci est appelé représentation dans le
+domaine temporel. Lorsque la courbe est proche du bas du graphique, la pression est faible, et lorsque la courbe est proche du haut, la pression d’air a augmenté. L’amplitude de la forme d’onde est la
+quantité de changement de pression d’air ; nous pouvons mesurer l’amplitude comme la distance
+verticale entre le point de pression zéro et le point le plus haut (ou le plus bas) d’un segment de forme
+d’onde donné.
+Un instrument acoustique crée du son en émettant des vibrations qui changent la pression de l’air
+autour de l’instrument. Un haut-parleur crée du son en se déplaçant d’avant en arrière selon les
+changements de tension dans un signal électronique. Lorsque le haut-parleur « entre » par rapport
+à sa position de repos, la pression d’air diminue. Lorsque le haut-parleur « sort », la pression d’air
+près du haut-parleur augmente. Pour créer un son audible, ces différentes vibrations doivent subvenir à une fréquence comprise entre 20 et 20 000 Hz.
+
+✦
+
+Représentation dans le domaine fréquentiel
+
+Mise à part la fréquence fondamentale, il peut y avoir de nombreuses fréquences présentes dans
+une forme d’onde. Une représentation dans le domaine fréquentiel ou représentation du spectre
+montre le contenu fréquentiel d’un son. Les composants fréquentiels individuels du spectre sont
+appelés harmoniques ou partiels. Les fréquences harmoniques sont des multiples entiers de la fréquence fondamentale. Si l’on considère une fondamentale ou premier harmonique de 440 Hz, son
+second harmonique sera 880 Hz, son troisième 1 320 Hz, et ainsi de suite. De façon plus générale,
+n’importe quel composant harmonique peut être appelé partiel, qu’il soit ou non multiple entier de
+la fondamentale. En fait, de nombreux sons n’ont pas de fréquence fondamentale particulière.
+
+12
+
+ENVIRONNEMENT
+
+(a)
+
+ET OUTILS
+
+100%
+
+Amp.
+
+-100%
+0°
+
+360°
+Phase
+
+(b)
+
+100%
+
+Amp.
+0%
+1
+
+10
+
+20
+
+30
+
+40
+
+50 60
+
+Harmoniques
+(c)
+
+100%
+
+Amp.
+
+-100%
+0°
+
+Phase
+
+360°
+
+(d)
+
+Amp.
+1
+
+10
+
+20
+
+30 40
+
+50 60
+
+Harmoniques
+Figure 1.9 – Représentations dans les domaines temporels et fréquentiels de quatre signaux.
+(a) Vue dans le domaine temporel d’un cycle de sinusoïde. (b) Spectre du composant unique de
+fréquence d’une sinusoïde. (c) Vue dans le domaine temporel d’une forme d’onde en dent-de-scie.
+(d) Spectre montrant le contenu fréquentiel d’une dent-de-scie décroissant de façon exponentielle.
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+CHAPITRE 1 – CONCEPTS
+
+AUDIONUMÉRIQUES
+
+Figure 1.9 – Suite
+(e) Vue dans le domaine temporel d’un cycle de forme d’onde complexe. Bien que la forme d’onde
+ait un aspect complexe, lorsqu’elle est répétée elle sonne de façon simple — comme un son d’orgue
+à anche. (f) Le spectre de la forme d’onde (e) montre qu’il est dominé par quelques fréquences.
+(g) Forme d’onde de bruit aléatoire. (h) Si la forme d’onde change constamment (chaque cycle est
+différent du cycle précédent), nous entendons du bruit. Le contenu du bruit est très complexe. Dans
+ce cas, l’analyse extrait 252 fréquences. Cet instantané ne montre pas comment leurs amplitudes
+varient dans le temps.
+
+13
+
+14
+
+ENVIRONNEMENT
+
+ET OUTILS
+
+Le contenu fréquentiel d’une forme d’onde peut être représenté de nombreuses façons. Une représentation standard consiste à relever les partiels sous forme de lignes sur un axe x. La hauteur de
+chaque ligne indique la force (ou amplitude) de chaque composant fréquentiel. Le signal le plus
+pur est une forme d’onde dite sinusoïde, car elle peut être calculée grâce à la formule trigonométrique
+du sinus d’un angle. Une onde sinusoïdale pure représente juste un composant fréquentiel ou une
+ligne dans le spectre. La figure 1.9 montre les représentations dans le domaine temporel et dans le
+domaine fréquentiel de quelques formes d’ondes. Remarquez que les relevés spectraux sont nommés
+« Harmoniques » sur leur axe horizontal, puisque l’algorithme d’analyse suppose que l’entrée est
+exactement une période de la fondamentale d’une forme d’onde périodique. Dans le cas du bruit à
+la figure 1.9g, cette supposition n’est pas valide, donc nous renommons les partiels « Composants
+fréquentiels ».
+
+1.2.2 Phase
+Le point de départ d’une forme d’onde périodique sur l’axe d’amplitude ou axe des y est sa phase
+initiale. Par exemple, une sinusoïde typique commence à l’amplitude 0 et achève son cycle à 0.
+Si l’on déplace le point de départ de 2¼ sur l’axe horizontal (ou 90 degrés), la sinusoïde commence
+et s’achève à 1 sur l’axe d’amplitude. Par convention, on nomme cette forme d’onde cosinus. En effet,
+un cosinus est l’équivalent d’un sinus déphasé de 90 degrés (figure 1.10).
+Cosinus
+Sinus
+
+Amp.
+-1
+Temps
+Figure 1.10 – Une sinusoïde est équivalente à une forme d’onde cosinus
+retardée ou légèrement déphasée.
+
+Lorsque deux signaux commencent au même point, on dit qu’ils sont en phase ou en alignement de
+phase. Au contraire, lorsqu’un signal est légèrement retardé par rapport à un autre, on dit qu’ils
+sont déphasés. Lorsqu’un signal A est exactement l’opposé d’un autre signal B (c’est-à-dire déphasé
+de 180 degrés, pour qu’à chaque valeur positive de A, il existe une valeur correspondante négative
+pour le signal B), nous disons que B est en polarité inversée par rapport à A. Nous pourrions également dire que B est une copie en inversion de phase de A. La figure 1.11 montre l’effet de l’addition de
+deux signaux en inversion de phase.
+
+✦
+
+Importance de la phase
+
+On dit souvent que la phase est insignifiante à l’oreille humaine, parce que deux signaux totalement
+identiques à l’exception de leur phase sont difficiles à distinguer. En fait, les recherches montrent
+que des différences de 180 degrés en phase ou polarité absolue peuvent être distinguées par certaines
+personnes en condition de laboratoire (Greiner et Melton, 1991). Mais même en dehors de ce cas
+
+CHAPITRE 1 – CONCEPTS
+
+15
+
+AUDIONUMÉRIQUES
+
+(a)
+0
+
++
+(b)
+0
+
+⇓
+(c)
+0
+
+© Dunod. Toute reproduction non autorisée est un délit.
+
+Figure 1.11 – Les effets de l’inversion de phase.
+(b) est la copie en inversion de phase de (a).
+Si les deux formes d’onde sont additionnées, leur résultat est nul (c).
+
+particulier, la phase est un concept important pour diverses raisons. Tous les filtres utilisent le
+déphasage pour altérer les signaux. Un filtre déphase un signal (en retardant son entrée d’un temps
+très court) puis combine la version déphasée avec le signal originel pour créer des effets d’annulation
+de phase en fonction de la fréquence qui altèrent le spectre de l’original. Par « en fonction de la
+fréquence », nous voulons dire que tous les composants fréquentiels ne sont pas affectés de façon
+égale. Lorsque le déphasage change dans le temps, les bandes fréquentielles affectées changent
+également, créant des effets sonores de balayage appelés phasing ou flanger (voir le chapitre 6).
+La phase est également importante dans les systèmes qui resynthétisent le son en se basant sur
+l’analyse d’un son existant. En particulier, ces systèmes ont besoin de connaître la phase initiale de
+chaque composant fréquentiel afin de replacer les différents composants dans le bon ordre (voir le
+chapitre 11). Les données de phase sont particulièrement critiques lors de restitution de sons transitoires courts et changeants rapidement, tels que l’attaque de sons instrumentaux.
+Finalement, une grande attention a été portée depuis quelques années sur les composants audio
+qui déphasent leur signal d’entrée au minimum, car les déphasages dépendant de la fréquence distordent les signaux musicaux audibles et interfèrent avec l’image des haut-parleurs. L’image est la
+capacité d’un ensemble de haut-parleurs à créer une « image audio » stable, où chaque source est bien
+localisée à une place précise. Un déphasage involontaire est appelé distorsion de phase. Pour prendre
+une analogie avec l’image, un signal en distorsion de phase est « flou ».
+Maintenant que nous avons présenté les propriétés de base des signaux audio, nous allons comparer
+leurs deux représentations : analogique et numérique.
+
+16
+
+ENVIRONNEMENT
+
+1.3
+
+ET OUTILS
+
+Représentations analogiques du son
+La quantité électrique appelée tension, tout comme la pression de l’air, varie dans le fil métallique
+connectant un amplificateur avec des haut-parleurs selon les ondes sonores. Inutile de définir ici
+ce qu’est la tension. Pour les besoins de ce chapitre, nous pouvons simplement considérer qu’il est
+possible de modifier les propriétés électriques du fil métallique de façon à ce qu’elles suivent étroitement les changements de pression d’air.
+Une des caractéristiques importantes des quantités variant dans le temps dont nous venons de parler
+(pression d’air et tension) est que chacune d’entre elles est plus ou moins analogue à l’autre. Un
+graphique des variations de pression d’air captées par un microphone a un aspect très similaire à
+celui d’un graphique des variations de la position du haut-parleur lorsque le son est lu. Le terme
+« analogue » sert à se souvenir de la relation qui lie ces quantités.
+La figure 1.12 montre une chaîne audioanalogique. La courbe d’un signal audio peut être inscrite
+le long des sillons d’un disque phonographique. Les parois des sillons contiennent une représentation
+temporelle continue du son stocké sur le disque. Lorsque l’aiguille glisse à travers le sillon, elle se
+Platine
+tourne-disque
+
+Sillons microscopiques
+d’un enregistrement
+phonographique
+Temps
+
+Signal électronique
+faible
+Préamplificateur
+Signal légèrement
+amplifié
+Amplificateur
+0
+
+Signal très amplifié
+
+Variation de pression d’air
+(son)
+
+Haut-parleur
+Figure 1.12 – La chaîne audioanalogique, commençant avec une forme d’onde analogique
+transformée à partir des sillons d’un disque en tension, qui est ensuite envoyée dans un préamplificateur, un amplificateur, un haut-parleur, puis projetée dans l’air.
+
+
