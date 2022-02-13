@@ -1,6 +1,6 @@
-const assert = require('assert');
-const { isbnDetect } = require('../src/isbn-detect.js');
-const fs = require('fs');
+import assert from 'assert';
+import { isbnDetect } from '../src/isbn-detect.js';
+import fs from 'fs';
 
 describe('isbn-detect', function() {
   it('detects valid ISBNs', function() {

@@ -1,8 +1,8 @@
-const assert = require('assert');
-const sinon = require('sinon');
-const fs = require('fs');
-const isbnApi = require('node-isbn');
-const { isbnFormat }  = require('../src/isbn-format.js');
+import assert from 'assert';
+import sinon from 'sinon';
+import fs from 'fs';
+import isbnApi from 'node-isbn';
+import { isbnFormat } from '../src/isbn-format.js';
 
 describe('isbn-format', function() {
   let requestStub = null;
