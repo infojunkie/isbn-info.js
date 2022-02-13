@@ -79,7 +79,7 @@ if (!isMochaRunning(global)) {
   })();
 }
 
-export async function isbnInfo(input, OPTIONS) {
+export async function isbnFormat(input, OPTIONS) {
   return new Promise(function(resolve, reject) {
     const isbn = parseInput(input);
     if (!isbn) {

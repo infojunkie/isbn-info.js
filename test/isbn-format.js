@@ -2,9 +2,9 @@ const assert = require('assert');
 const sinon = require('sinon');
 const fs = require('fs');
 const isbnApi = require('node-isbn');
-const { isbnInfo }  = require('../src/isbn-info.js');
+const { isbnFormat }  = require('../src/isbn-format.js');
 
-describe('isbn-info', function() {
+describe('isbn-format', function() {
   let requestStub = null;
 
   beforeEach(function() {
@@ -24,7 +24,7 @@ describe('isbn-info', function() {
       '/path/to/ebook/9780735619678.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004) 9780735619678.pdf',
     ].forEach(async (test) => {
-      assert.strictEqual(await isbnInfo(test, {
+      assert.strictEqual(await isbnFormat(test, {
         flags: {
           'quiet': true,
           'sanitize': false,
@@ -41,7 +41,7 @@ describe('isbn-info', function() {
       '/path/to/ebook/Steve McConnell - Code Complete (2004) 9780735619677.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004).pdf',
     ].forEach(async (test) => {
-      assert.rejects(isbnInfo(test, {
+      assert.rejects(isbnFormat(test, {
         flags: {
           'quiet': true,
           'sanitize': false,
@@ -57,7 +57,7 @@ describe('isbn-info', function() {
       delete book.publishedDate;
       callback(null, book);
     });
-    assert.strictEqual(await isbnInfo('9780735619678', {
+    assert.strictEqual(await isbnFormat('9780735619678', {
       flags: {
         'quiet': true,
         'sanitize': false,
@@ -74,7 +74,7 @@ describe('isbn-info', function() {
       delete book.title;
       callback(null, book);
     });
-    assert.strictEqual(await isbnInfo('9780735619678', {
+    assert.strictEqual(await isbnFormat('9780735619678', {
       flags: {
         'quiet': true,
         'sanitize': false,
@@ -84,7 +84,7 @@ describe('isbn-info', function() {
   });
 
   it('add ISBN if not present in source', async function() {
-    const book = JSON.parse(await isbnInfo('9780735619678', {
+    const book = JSON.parse(await isbnFormat('9780735619678', {
       flags: {
         'quiet': true,
         'sanitize': false,
@@ -103,7 +103,7 @@ describe('isbn-info', function() {
       `.trim();
       callback(null, book);
     });
-    const filename = await isbnInfo('9780735619678.pdf', {
+    const filename = await isbnFormat('9780735619678.pdf', {
       flags: {
         'quiet': true,
         'sanitize': true,

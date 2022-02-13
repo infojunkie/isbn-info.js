@@ -7,15 +7,15 @@ A console tool to identify a book by its ISBN and output formatted metadata.
 
 ```
 npm i -g isbn-info
-isbn-info 0735619670
+isbn-format 0735619670
 // => Steve McConnell - Code Complete (2004) 9780735619678
 ```
 
 ## Usage
 
-### isbn-info
+### isbn-format
 ```
-  Usage: isbn-info <isbn>
+  Usage: isbn-format <isbn>
 
   Options:
     -f, --format=FORMAT       output format for book information

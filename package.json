@@ -1,13 +1,13 @@
 {
   "name": "isbn-info",
-  "version": "1.2.8",
-  "description": "A console tool to identify a book by its ISBN and output formatted metadata.",
+  "version": "1.2.9",
+  "description": "Console tools to identify books by their ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
     "url": "https://github.com/infojunkie/isbn-info"
   },
   "bin": {
-    "isbn-info": "./lib/isbn-info.js",
+    "isbn-format": "./lib/isbn-format.js",
     "isbn-detect": "./lib/isbn-detect.js",
     "isbn-extract": "./src/isbn-extract.sh",
     "isbn-bulk-rename": "./src/isbn-bulk-rename.sh"
