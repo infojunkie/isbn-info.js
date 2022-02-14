@@ -23,6 +23,8 @@ if (!isMochaRunning(global)) {
     -h, --help                show usage information
     -v, --version             show version information
   `, {
+    description: 'Detect and output all ISBNs or ISSNs in the input block of text.',
+    importMeta: import.meta,
     flags: {
       type: {
         type: 'string',

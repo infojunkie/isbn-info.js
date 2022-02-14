@@ -34,6 +34,8 @@ if (!isMochaRunning(global)) {
       -h, --help                show usage information
       -v, --version             show version information
     `, {
+      description: 'Identify a book by its ISBN and output formatted metadata.',
+      importMeta: import.meta,
       flags: {
         format: {
           type: 'string',
@@ -68,7 +70,7 @@ if (!isMochaRunning(global)) {
 
   (async () => {
     try {
-      const output = await isbnInfo(OPTIONS.input[0], OPTIONS);
+      const output = await isbnFormat(OPTIONS.input[0], OPTIONS);
       console.log(output);
     } catch (e) {
       if (!OPTIONS.flags['quiet']) {

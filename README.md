@@ -3,18 +3,20 @@
 [![npm version](https://badge.fury.io/js/isbn-info.svg)](https://badge.fury.io/js/isbn-info)
 ![GitHub Build Status](https://github.com/infojunkie/isbn-info/workflows/Test/badge.svg)
 
-A console tool to identify a book by its ISBN and output formatted metadata.
+Console tools to identify books by their ISBN and output formatted metadata.
 
 ```
 npm i -g isbn-info
 isbn-format 0735619670
-// => Steve McConnell - Code Complete (2004) 9780735619678
+// => Steve McConnell - Code Complete (2004) 0735619670
 ```
 
 ## Usage
 
 ### isbn-format
 ```
+  Identify a book by its ISBN and output formatted metadata.
+
   Usage: isbn-format <isbn>
 
   Options:
@@ -36,6 +38,20 @@ isbn-format 0735619670
     -v, --version             show version information
 ```
 
+### isbn-detect
+```
+  Detect and output all ISBNs or ISSNs in the input block of text.
+
+  Usage: isbn-detect < path/to/text-file
+
+  Options:
+    -t, --type=TYPE           type of information to extract:
+                                ISBN (default)
+                                ISSN
+    -h, --help                show usage information
+    -v, --version             show version information
+
+```
 ### isbn-extract
 To extract ISBN / ISSN from an ebook's contents:
 ```

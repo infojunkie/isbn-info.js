@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "1.2.9",
+  "version": "2.0.0",
   "description": "Console tools to identify books by their ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "src/isbn-extract.sh"
   ],
   "engines": {
-    "node": ">=12"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "engineStrict": true,
   "dependencies": {

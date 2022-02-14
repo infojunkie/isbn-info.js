@@ -2,7 +2,7 @@
 set -eu
 
 usage() {
-  echo "Usage: [-x] [-h] $(basename $BASH_SOURCE) /path/to/folder" 1>&2; exit 1;
+  echo "Usage: $(basename $BASH_SOURCE) [-x] [-h] /path/to/folder" 1>&2; exit 1;
 }
 
 extract=false
