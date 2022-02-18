@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Console tools to identify books by their ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
@@ -33,7 +33,6 @@
     "@babel/runtime": "^7.17.2",
     "isbn3": "^1.1.19",
     "issn": "^1.0.6",
-    "jsonld-parser": "^0.6.1",
     "meow": "^10.1.2",
     "node-isbn": "^1.6.1"
   },
