@@ -29,6 +29,10 @@ describe('isbn-detect', function() {
         text: './test/data/test6.txt',
         isbns: ['9780190692681', '9780190692698', '9780190692704', '9780190692674']
       },
+      {
+        text: './test/data/test7.txt',
+        isbns: ['9781138921375', '9781138921368', '9781315686424']
+      },
     ]) {
       assert.deepStrictEqual(isbnDetect(fs.readFileSync(test.text, 'utf-8'), {
         flags: {
