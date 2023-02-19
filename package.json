@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Console tools to identify books by their ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
     "build": "babel src -d lib"
   },
   "author": "Karim Ratib <karim.ratib@gmail.com> (https://github.com/infojunkie)",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "files": [
     "LICENSE.txt",
     "lib/*",
@@ -45,7 +45,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/register": "^7.17.0",
     "babel-plugin-inline-json-import": "^0.3.2",
-    "mocha": "^9.2.0",
+    "mocha": "^10.0.0",
     "sinon": "^13.0.1"
   }
 }
