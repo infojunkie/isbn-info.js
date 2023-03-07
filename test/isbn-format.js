@@ -19,13 +19,14 @@ describe('isbn-format', function() {
   });
 
   it('formats valid ISBNs', async function() {
-    [
+    for (const test of [
       '9780735619678',
+      '978-0-735-61967-8',
       '/path/to/ebook/9780735619678.pdf',
       '/path/to/ebook/978-0-735-61967-8.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004) 9780735619678.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004) 978-0-735-61967-8.pdf',
-    ].forEach(async (test) => {
+    ]) {
       assert.strictEqual(await isbnFormat(test, {
         flags: {
           'quiet': true,
@@ -33,16 +34,16 @@ describe('isbn-format', function() {
           'format': '%A - (%Y) %T'
         }
       }), 'Steve McConnell - (2004) Code Complete');
-    });
+    };
   });
 
   it('rejects invalid and missing ISBNs', async function() {
-    [
+    for (const test of [
       '9780735619677',
       '/path/to/ebook/9780735619677.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004) 9780735619677.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004).pdf',
-    ].forEach(async (test) => {
+    ]) {
       assert.rejects(isbnFormat(test, {
         flags: {
           'quiet': true,
@@ -50,7 +51,7 @@ describe('isbn-format', function() {
           'format': '%A - (%Y) %T'
         }
       }));
-    });
+    };
   });
 
   it('does not crash on empty fields', async function() {

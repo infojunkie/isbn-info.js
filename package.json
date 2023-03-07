@@ -1,6 +1,6 @@
 {
   "name": "isbn-info",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Console tools to identify books by their ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
