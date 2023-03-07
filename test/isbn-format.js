@@ -22,7 +22,9 @@ describe('isbn-format', function() {
     [
       '9780735619678',
       '/path/to/ebook/9780735619678.pdf',
+      '/path/to/ebook/978-0-735-61967-8.pdf',
       '/path/to/ebook/Steve McConnell - Code Complete (2004) 9780735619678.pdf',
+      '/path/to/ebook/Steve McConnell - Code Complete (2004) 978-0-735-61967-8.pdf',
     ].forEach(async (test) => {
       assert.strictEqual(await isbnFormat(test, {
         flags: {

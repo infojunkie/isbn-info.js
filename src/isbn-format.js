@@ -107,7 +107,7 @@ export async function isbnFormat(input, OPTIONS) {
 function parseInput(input) {
   // Extract ISBN from input.
   const filename = path.basename(input, path.extname(input)).replace('-', '');
-  const isbn = filename.match(/\d{13}|\d{10}|\d{9}X/i);
+  const isbn = filename.match(/(?:(?:[-–]1[03])?:?\s+)?((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X])/gi);
 
   // Ignore invalid ISBN strings.
   return isbn ? isbn3.parse(isbn[0]) : null;
