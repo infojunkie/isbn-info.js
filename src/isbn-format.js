@@ -87,9 +87,9 @@ export async function isbnFormat(input, OPTIONS) {
     if (!isbn) {
       reject(new Error(`Not a valid ISBN: ${input}`));
     } else {
-      isbnApi.resolve(isbn.source, function(err, book) {
+      isbnApi.resolve(isbn.isbn13 ?? isbn.isbn10, function(err, book) {
         if (err) {
-          reject(new Error(`Failed to query ${input} with error: ${err}`));
+          reject(new Error(`Failed to query ${input}: ${err}`));
         }
         else {
           try {
