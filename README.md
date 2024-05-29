@@ -91,7 +91,7 @@ fi
 - Create the following [Nautilus script](https://askubuntu.com/a/236415/54112) with an explanatory filename:
 ```
 #!/bin/sh
-isbn-bulk-rename "$@"
+for f in "$@"; do isbn-bulk-rename "$f"; done
 notify-send -t 3000 "ISBN renaming done"
 ```
 
