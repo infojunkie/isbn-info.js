@@ -102,7 +102,7 @@ describe('isbn-format', function() {
     requestStub.callsFake(function(_, callback) {
       const book = JSON.parse(fs.readFileSync('./test/data/book.json', 'utf-8'));
       book.title = `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend, elit ut molestie consequat, elit lectus eleifend sem, sit amet malesuada nulla justo et nisi. Ut ut risus mi. Nam quis risus ac eros lacinia maximus in eu nisl. Fusce a interdum augue. Sed blandit neque sed scelerisque rutrum. Ut eros mauris, efficitur non purus facilisis, convallis eleifend lectus. Sed pretium mauris lectus, ac posuere metus blandit ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus elementum, metus in imperdiet molestie, tortor nisl convallis odio, vitae sollicitudin nisl est vitae nulla. Fusce lobortis aliquam quam id ullamcorper. Maecenas in ipsum id ligula tempor scelerisque nec ac mauris. Mauris porttitor nunc sem, vel pellentesque dui gravida lobortis. Maecenas faucibus tristique egestas. Integer dictum sapien dignissim venenatis consequat
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend, elit ut molestie consequat, elit lectus eleifend sem, sit amet malesuada nulla justo et nisi. Ut ut risus mi. Nam quis risus ac eros lacinia maximus in eu nisl. Fusce a interdum augue. Sed blandit neque sed scelerisque rutrum. Ut eros mauris, efficitur non purus facilisis, convallis eleifend lectus. Sed pretium mauris lectus, ac posuere metus blandit ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus elementum, metus in imperdiet molestie, tortor nisl convallis odio, vitae sollicitudin nisl est vitae nulla. Fusce lobortis aliquam quam id ullamcorper. Maecenas in ipsum id ligula tempor scelerisque nec ac mauris. Mauris porttitor nunc sem, vel pellentesque dui gravida lobortis. Maecenas faucibus tristique egestas. Integer: dictum sapien dignissim venenatis consequat
       `.trim();
       callback(null, book);
     });
@@ -114,7 +114,7 @@ describe('isbn-format', function() {
       }
     });
     assert.strictEqual(Buffer.byteLength(filename), 255);
-    const expected = /Integer dictum sapien dignissim venenatis consequat.pdf$/;
+    const expected = /Integer. dictum sapien dignissim venenatis consequat.pdf$/;
     assert(filename.match(expected), `Expected value to match regex:\n\n${filename}\n\n${expected}`);
   });
 });

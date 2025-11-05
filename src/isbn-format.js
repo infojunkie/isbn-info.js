@@ -159,7 +159,7 @@ function formatBook(input, book, OPTIONS) {
     '%I3': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13')[0].identifier,
     '%IS': book => book.industryIdentifiers.filter(id => id.type === 'ISSN')[0].identifier,
     '%I': book => book.industryIdentifiers.filter(id => id.type === 'ISBN_13' || id.type === 'ISBN_10')[0].identifier,
-    '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join('. ').replace(/[\r\n\s]+/g, ' '),
+    '%T': book => [].concat(book.title, book.subtitle).filter(v => v).join('. ').replace(':', '.').replace(/[\r\n\s]+/g, ' '),
     '%Y': book => book.publishedDate.match(/\d{4}/)[0],
     '%A': book => book.authors.join(', '),
     '%D': book => book.description,
