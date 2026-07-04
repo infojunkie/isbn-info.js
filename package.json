@@ -14,8 +14,11 @@
   },
   "type": "module",
   "scripts": {
-    "test": "mocha --require @babel/register",
-    "build": "babel src -d lib"
+    "build": "tsc",
+    "test": "mocha --require tsx test/**/*.test.ts",
+    "test:unit": "mocha --require tsx test/**/*.test.ts --grep '@unit'",
+    "test:integration": "mocha --require tsx test/**/*.test.ts --grep '@integration'",
+    "dev": "tsx src/isbn-format.ts"
   },
   "author": "Karim Ratib <karim.ratib@gmail.com> (https://github.com/infojunkie)",
   "license": "GPL-3.0-only",
@@ -30,22 +33,20 @@
   },
   "engineStrict": true,
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
+    "axios": "^1.6.0",
+    "fast-xml-parser": "^4.3.0",
     "isbn3": "^1.1.19",
     "issn": "^1.0.6",
-    "meow": "^10.1.2",
-    "node-isbn": "^1.6.1"
+    "meow": "^10.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
-    "@babel/node": "^7.16.8",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/plugin-transform-strict-mode": "^7.16.7",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/register": "^7.17.0",
-    "babel-plugin-inline-json-import": "^0.3.2",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "@types/sinon": "^17.0.3",
+    "chai": "^4.4.1",
     "mocha": "^10.0.0",
-    "sinon": "^13.0.1"
+    "sinon": "^13.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }

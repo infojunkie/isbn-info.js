@@ -1,3 +1,8 @@
 node_modules/
 *.log
 *.sublime-*
+dist-test/
+*.tsbuildinfo
+lib/*.map
+lib/*.d.ts
+lib/*.d.ts.map

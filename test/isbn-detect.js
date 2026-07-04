@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isbnDetect } from '../src/isbn-detect.js';
+import { isbnDetect } from '../lib/isbn-detect.js';
 import fs from 'fs';
 
 describe('isbn-detect', function() {
