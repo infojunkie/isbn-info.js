@@ -25,10 +25,6 @@
     "src/isbn-bulk-rename.sh",
     "src/isbn-extract.sh"
   ],
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "engineStrict": true,
   "dependencies": {
     "axios": "^1.6.0",
     "fast-xml-parser": "^4.3.0",
