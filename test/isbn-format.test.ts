@@ -2,7 +2,7 @@ import assert from 'assert';
 import sinon, { SinonStub } from 'sinon';
 import fs from 'fs';
 import axios, { AxiosResponse } from 'axios';
-import { isbnFormat } from '../src/isbn-format.js';
+import { isbnFormat } from '../src/isbn-format.ts';
 
 interface FormatOptions {
   flags: {

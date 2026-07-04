@@ -1,8 +1,4 @@
 node_modules/
-*.log
-*.sublime-*
-dist-test/
-*.tsbuildinfo
-lib/*.map
-lib/*.d.ts
-lib/*.d.ts.map
+build/*.map
+build/*.d.ts
+build/*.d.ts.map

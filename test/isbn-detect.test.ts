@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isbnDetect } from '../src/isbn-detect.js';
+import { isbnDetect } from '../src/isbn-detect.ts';
 import fs from 'fs';
 
 interface TestCase {

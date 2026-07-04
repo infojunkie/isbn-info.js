@@ -7,8 +7,8 @@
     "url": "https://github.com/infojunkie/isbn-info"
   },
   "bin": {
-    "isbn-format": "./lib/isbn-format.js",
-    "isbn-detect": "./lib/isbn-detect.js",
+    "isbn-format": "./build/isbn-format.js",
+    "isbn-detect": "./build/isbn-detect.js",
     "isbn-extract": "./src/isbn-extract.sh",
     "isbn-bulk-rename": "./src/isbn-bulk-rename.sh"
   },
@@ -21,7 +21,7 @@
   "license": "GPL-3.0-only",
   "files": [
     "LICENSE.txt",
-    "lib/*",
+    "build/*",
     "src/isbn-bulk-rename.sh",
     "src/isbn-extract.sh"
   ],
