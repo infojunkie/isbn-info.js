@@ -100,7 +100,7 @@ notify-send -t 3000 "ISBN renaming done"
 ```
 git clone https://github.com/infojunkie/isbn-info
 npm install
-npm test
+GOOGLE_BOOKS_API_KEY=your_api_key npm test
 npm run build
 npm run link
 ```

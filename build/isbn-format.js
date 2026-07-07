@@ -2,43 +2,43 @@
 import isbn3 from 'isbn3';
 import path from 'path';
 import meow from 'meow';
-import axios from 'axios';
-import { XMLParser } from 'fast-xml-parser';
+import nodeFetch from 'node-fetch';
+/** HTTP wrapper — exported so tests can stub it. */
+export const http = {
+    fetch: (url, init) => nodeFetch(url, init)
+};
 const defaultOptions = {
-    poll: {
-        maxSockets: 500,
-    },
     timeout: 5000
 };
 const GOOGLE_BOOKS_API_BASE = 'https://www.googleapis.com';
 const GOOGLE_BOOKS_API_BOOK = '/books/v1/volumes';
 const OPENLIBRARY_API_BASE = 'https://openlibrary.org';
 const OPENLIBRARY_API_BOOK = '/api/books';
-const OCLC_CLASSIFY_API_BASE = 'http://classify.oclc.org';
-const OCLC_CLASSIFY_API_BOOK = '/classify2/Classify';
 const PROVIDER_NAMES = {
     GOOGLE: 'google',
-    OPENLIBRARY: 'openlibrary',
-    OCLC_CLASSIFY: 'oclc-classify'
+    OPENLIBRARY: 'openlibrary'
 };
 const DEFAULT_PROVIDERS = [
     PROVIDER_NAMES.GOOGLE,
-    PROVIDER_NAMES.OPENLIBRARY,
-    PROVIDER_NAMES.OCLC_CLASSIFY
+    PROVIDER_NAMES.OPENLIBRARY
 ];
-const PROVIDER_RESOLVERS = {
+export const PROVIDER_RESOLVERS = {
     [PROVIDER_NAMES.GOOGLE]: _resolveGoogle,
-    [PROVIDER_NAMES.OPENLIBRARY]: _resolveOpenLibrary,
-    [PROVIDER_NAMES.OCLC_CLASSIFY]: _resolveOclcClassify
+    [PROVIDER_NAMES.OPENLIBRARY]: _resolveOpenLibrary
 };
 function _resolveGoogle(isbn, options) {
     const requestOptions = Object.assign({}, defaultOptions, options, {
         url: `${GOOGLE_BOOKS_API_BASE + GOOGLE_BOOKS_API_BOOK}?q=isbn:${isbn}&key=${process.env.GOOGLE_BOOKS_API_KEY || ''}`
     });
-    return axios.request(requestOptions).then(({ status, data }) => {
-        if (status !== 200) {
-            throw new Error(`wrong response code: ${status}`);
+    return http.fetch(requestOptions.url, {
+        headers: requestOptions.headers,
+        signal: AbortSignal.timeout(requestOptions.timeout ?? defaultOptions.timeout),
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error(`wrong response code: ${response.status}`);
         }
+        return response.json();
+    }).then(data => {
         const books = data;
         if (!books.totalItems) {
             throw new Error(`no books found with isbn: ${isbn}`);
@@ -88,7 +88,7 @@ function _resolveOpenLibrary(isbn, options) {
                         standardBook.language = 'fr';
                         break;
                     default:
-                        standardBook.language = 'unknown';
+                        standardBook.language = key.replace('/languages/', '');
                         break;
                 }
             });
@@ -101,104 +101,21 @@ function _resolveOpenLibrary(isbn, options) {
     const requestOptions = Object.assign({}, defaultOptions, options, {
         url: `${OPENLIBRARY_API_BASE + OPENLIBRARY_API_BOOK}?bibkeys=ISBN:${isbn}&format=json&jscmd=details`
     });
-    return axios.request(requestOptions).then(({ status, data }) => {
-        if (status !== 200) {
-            throw new Error(`wrong response code: ${status}`);
+    return http.fetch(requestOptions.url, {
+        headers: requestOptions.headers,
+        signal: AbortSignal.timeout(requestOptions.timeout ?? defaultOptions.timeout),
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error(`wrong response code: ${response.status}`);
         }
+        return response.json();
+    }).then(data => {
         const books = data;
         const book = books[`ISBN:${isbn}`];
         if (!book) {
             throw new Error(`no books found with isbn: ${isbn}`);
         }
         return standardize(book);
-    });
-}
-function _resolveOclcClassify(isbn, options) {
-    const standardize = function standardize(classifyData) {
-        const standardBook = {
-            'title': '',
-            'publishedDate': '',
-            'authors': [],
-            'description': null,
-            'industryIdentifiers': [],
-            'pageCount': null,
-            'printType': 'BOOK',
-            'categories': [],
-            'imageLinks': {},
-            'publisher': ''
-        };
-        // Extract work information
-        if (classifyData.work) {
-            const work = Array.isArray(classifyData.work) ? classifyData.work[0] : classifyData.work;
-            standardBook.title = work['@_title'] || '';
-            if (work['@_author']) {
-                standardBook.authors.push(work['@_author']);
-            }
-            // Extract edition information
-            if (work.editions && work.editions.edition) {
-                const editions = Array.isArray(work.editions.edition)
-                    ? work.editions.edition
-                    : [work.editions.edition];
-                // Use the first edition for metadata
-                const firstEdition = editions[0];
-                if (firstEdition) {
-                    if (firstEdition['@_publisher']) {
-                        standardBook.publisher = firstEdition['@_publisher'];
-                    }
-                    if (firstEdition['@_year']) {
-                        standardBook.publishedDate = firstEdition['@_year'];
-                    }
-                    if (firstEdition['@_language']) {
-                        const lang = firstEdition['@_language'];
-                        switch (lang) {
-                            case 'eng':
-                                standardBook.language = 'en';
-                                break;
-                            case 'spa':
-                                standardBook.language = 'es';
-                                break;
-                            case 'fre':
-                                standardBook.language = 'fr';
-                                break;
-                            default:
-                                standardBook.language = lang;
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-        return standardBook;
-    };
-    const requestOptions = Object.assign({}, defaultOptions, options, {
-        url: `${OCLC_CLASSIFY_API_BASE + OCLC_CLASSIFY_API_BOOK}?isbn=${isbn}&summary=true`
-    });
-    return axios.request(requestOptions).then(({ status, data }) => {
-        if (status !== 200) {
-            throw new Error(`wrong response code: ${status}`);
-        }
-        // Parse XML response
-        const parser = new XMLParser({
-            ignoreAttributes: false,
-            attributeNamePrefix: '@_'
-        });
-        const result = parser.parse(data);
-        if (!result.classify) {
-            throw new Error(`invalid XML response for isbn: ${isbn}`);
-        }
-        const classify = result.classify;
-        // Check response code
-        const responseCode = classify.response && classify.response['@_code'];
-        if (responseCode === '0' || responseCode === '2') {
-            // 0 = single work found, 2 = multiple works found (we'll use the first)
-            if (!classify.work) {
-                throw new Error(`no books found with isbn: ${isbn}`);
-            }
-            return standardize(classify);
-        }
-        else {
-            throw new Error(`no books found with isbn: ${isbn} (response code: ${responseCode})`);
-        }
     });
 }
 /**
