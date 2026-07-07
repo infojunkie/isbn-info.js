@@ -1,51 +1,45 @@
 {
   "name": "isbn-info",
-  "version": "2.2.5",
+  "version": "3.0.0",
   "description": "Console tools to identify books by their ISBN and output formatted metadata.",
   "repository": {
     "type": "git",
     "url": "https://github.com/infojunkie/isbn-info"
   },
   "bin": {
-    "isbn-format": "./lib/isbn-format.js",
-    "isbn-detect": "./lib/isbn-detect.js",
+    "isbn-format": "./build/isbn-format.js",
+    "isbn-detect": "./build/isbn-detect.js",
     "isbn-extract": "./src/isbn-extract.sh",
     "isbn-bulk-rename": "./src/isbn-bulk-rename.sh"
   },
   "type": "module",
   "scripts": {
-    "test": "mocha --require @babel/register",
-    "build": "babel src -d lib"
+    "build": "tsc",
+    "test": "mocha --require tsx test/**/*.test.ts"
   },
   "author": "Karim Ratib <karim.ratib@gmail.com> (https://github.com/infojunkie)",
   "license": "GPL-3.0-only",
   "files": [
     "LICENSE.txt",
-    "lib/*",
+    "build/*",
     "src/isbn-bulk-rename.sh",
     "src/isbn-extract.sh"
   ],
-  "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
-  },
-  "engineStrict": true,
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
+    "axios": "^1.6.0",
+    "fast-xml-parser": "^4.3.0",
     "isbn3": "^1.1.19",
     "issn": "^1.0.6",
-    "meow": "^10.1.2",
-    "node-isbn": "^1.6.1"
+    "meow": "^10.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
-    "@babel/node": "^7.16.8",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/plugin-transform-strict-mode": "^7.16.7",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/register": "^7.17.0",
-    "babel-plugin-inline-json-import": "^0.3.2",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.19.43",
+    "@types/sinon": "^17.0.3",
+    "chai": "^4.4.1",
     "mocha": "^10.0.0",
-    "sinon": "^13.0.1"
+    "sinon": "^13.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }

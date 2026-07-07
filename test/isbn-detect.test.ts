@@ -1,10 +1,22 @@
 import assert from 'assert';
-import { isbnDetect } from '../src/isbn-detect.js';
+import { isbnDetect } from '../src/isbn-detect.ts';
 import fs from 'fs';
+
+interface TestCase {
+  text: string;
+  isbns?: string[];
+  issns?: string[];
+}
+
+interface DetectOptions {
+  flags: {
+    type: string;
+  };
+}
 
 describe('isbn-detect', function() {
   it('detects valid ISBNs', function() {
-    for (const test of [
+    const tests: TestCase[] = [
       {
         text: './test/data/test1.txt',
         isbns: ['9781492075455']
@@ -29,17 +41,20 @@ describe('isbn-detect', function() {
         text: './test/data/test6.txt',
         isbns: ['9780190692681', '9780190692698', '9780190692704', '9780190692674']
       },
-    ]) {
-      assert.deepStrictEqual(isbnDetect(fs.readFileSync(test.text, 'utf-8'), {
+    ];
+
+    for (const test of tests) {
+      const options: DetectOptions = {
         flags: {
           'type': 'isbn'
         }
-      }), test.isbns, test.text);
+      };
+      assert.deepStrictEqual(isbnDetect(fs.readFileSync(test.text, 'utf-8'), options), test.isbns, test.text);
     }
   });
 
   it('detects valid ISSNs', function() {
-    for (const test of [
+    const tests: TestCase[] = [
       {
         text: './test/data/test2.txt',
         issns: ['2191-5768', '2191-5776']
@@ -48,12 +63,15 @@ describe('isbn-detect', function() {
         text: './test/data/test3.txt',
         issns: ['2162-7258', '2162-7266']
       },
-    ]) {
-      assert.deepStrictEqual(isbnDetect(fs.readFileSync(test.text, 'utf-8'), {
+    ];
+
+    for (const test of tests) {
+      const options: DetectOptions = {
         flags: {
           'type': 'issn'
         }
-      }), test.issns, test.text);
+      };
+      assert.deepStrictEqual(isbnDetect(fs.readFileSync(test.text, 'utf-8'), options), test.issns, test.text);
     }
   });
 });

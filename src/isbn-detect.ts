@@ -1,18 +1,26 @@
 #!/usr/bin/env node
-"use strict";
-
 import isbn3 from 'isbn3';
 import issn from 'issn';
 import meow from 'meow';
 import fs from 'fs';
 import path from 'path';
 
+interface DetectOptions {
+  flags: {
+    type: string;
+    help?: boolean;
+    version?: boolean;
+  };
+  showHelp: () => void;
+}
+
 // https://stackoverflow.com/a/54577682/209184
-function isMochaRunning(context) {
-  return ['afterEach', 'after', 'beforeEach', 'before', 'describe', 'it'].every(function (functionName) {
+function isMochaRunning(context: any): boolean {
+  return ['afterEach','after','beforeEach','before','describe','it'].every(function(functionName) {
     return context[functionName] instanceof Function;
   });
 }
+
 if (!isMochaRunning(global)) {
   const OPTIONS = meow(`
   Usage: ${path.basename(process.argv[1])} < path/to/text-file
@@ -50,6 +58,7 @@ if (!isMochaRunning(global)) {
     default:
       OPTIONS.showHelp();
   }
+
   const text = fs.readFileSync('/dev/stdin', 'utf-8');
   if (OPTIONS.flags['help'] || !text.length) {
     OPTIONS.showHelp();
@@ -58,11 +67,10 @@ if (!isMochaRunning(global)) {
   // Print out unique set of matches.
   const matches = isbnDetect(text, OPTIONS);
   if (!matches.length) process.exit(1);
-  matches.forEach(match => {
-    console.log(match);
-  });
+  matches.forEach(match => { console.log(match); });
 }
-export function isbnDetect(text, OPTIONS) {
+
+export function isbnDetect(text: string, OPTIONS: DetectOptions): string[] {
   // Adapted from
   // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
   const regexes = {
@@ -70,13 +78,16 @@ export function isbnDetect(text, OPTIONS) {
     'isbn': /\b(?:(?:ISBN|International Standard Book Number|Library of Congress Control Number|LCCN)(?:[-–]1[03])?:?\s+)?((?=[0-9X]{10}\b|(?=(?:[0-9]+[-– ]){3})[-– 0-9X]{13}\b|97[89][0-9]{10}\b|(?=(?:[0-9]+[-– ]){4})[-– 0-9]{17}\b)(?:97[89][-– ]?)?[0-9]{1,5}[-– ]?[0-9]+[-– ]?[0-9]+[-– ]?[0-9X]\b)/gi,
     // https://regex101.com/r/Sl0PX3/2/
     'issn': /\b(?:(?:ISSN|International Standard Serial Number):?\s+)?((?:\d{4})[-–]?(?:\d{3})(?:[\dX]))\b/gi
-  };
-  const matches = [...text.matchAll(regexes[OPTIONS.flags['type']])].filter(match => !match[0].match(/Library of Congress Control Number|LCCN/gi)).map(match => match[1].replace(/–/g, '-')).reduce((matches, candidate) => {
+  }
+  const matches = [...text.matchAll(regexes[OPTIONS.flags['type'] as keyof typeof regexes])]
+  .filter(match => !match[0].match(/Library of Congress Control Number|LCCN/gi))
+  .map(match => match[1].replace(/–/g, '-'))
+  .reduce((matches: string[], candidate: string) => {
     if (OPTIONS.flags['type'] === 'isbn') {
       const p = isbn3.parse(candidate);
       if (p) {
-        if (p.isIsbn13) matches.push(p.isbn13);
-        if (p.isIsbn10) matches.push(p.isbn10);
+        if (p.isIsbn13 && p.isbn13) matches.push(p.isbn13);
+        if (p.isIsbn10 && p.isbn10) matches.push(p.isbn10);
       }
     } else {
       if (issn(candidate)) {
